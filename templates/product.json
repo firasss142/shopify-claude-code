@@ -217,6 +217,25 @@
               },
               "block_order": []
             },
+            "quraan_cod_block": {
+              "type": "quraan-cod-trust",
+              "settings": {
+                "title": "الدفع عند الاستلام",
+                "detail": "ادفع نقداً عند وصول الطلب — بدون رسوم مسبقة.",
+                "phone_hint": "سيتم التواصل معك على رقمك (+218) لتأكيد الطلب."
+              },
+              "blocks": {}
+            },
+            "quraan_shipping_block": {
+              "type": "quraan-shipping-info",
+              "settings": {
+                "title": "معلومات الشحن",
+                "line_1": "شحن إلى جميع المدن الليبية.",
+                "line_2": "مدة التوصيل: 2 - 5 أيام عمل.",
+                "line_3": "تغليف آمن يحفظ المصحف من الانثناء والرطوبة."
+              },
+              "blocks": {}
+            },
             "text_aEtTtq": {
               "type": "text",
               "name": "Product description",
@@ -249,6 +268,8 @@
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
+            "quraan_cod_block",
+            "quraan_shipping_block",
             "text_aEtTtq"
           ]
         }

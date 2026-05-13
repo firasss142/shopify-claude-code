@@ -1,0 +1,138 @@
+{{ 'quraan-rtl.css' | asset_url | stylesheet_tag }}
+{{ 'section-quraan-hero.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="quraan-hero color-{{ section.settings.color_scheme }}"
+  style="--quraan-hero-padding-top: {{ section.settings.padding_top }}px; --quraan-hero-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="quraan-hero__inner">
+    {% if section.settings.background_image != blank %}
+      <div class="quraan-hero__background">
+        {{
+          section.settings.background_image
+          | image_url: width: 2400
+          | image_tag: loading: 'eager', class: 'quraan-hero__background-img', alt: section.settings.background_image.alt
+        }}
+        <div class="quraan-hero__overlay"></div>
+      </div>
+    {% endif %}
+
+    <div class="quraan-hero__content">
+      {% if section.settings.kicker != blank %}
+        <p class="quraan-hero__kicker">{{ section.settings.kicker }}</p>
+      {% endif %}
+
+      <div class="quraan-hero__medallion" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="100" cy="100" r="78" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 4"/>
+          <path d="M100 30 L115 70 L155 70 L122 95 L135 135 L100 110 L65 135 L78 95 L45 70 L85 70 Z" fill="currentColor" opacity="0.85"/>
+        </svg>
+      </div>
+
+      <h1 class="quraan-hero__title">{{ section.settings.title }}</h1>
+
+      {% if section.settings.verse != blank %}
+        <p class="quraan-hero__verse">{{ section.settings.verse }}</p>
+      {% endif %}
+
+      {% if section.settings.subtitle != blank %}
+        <p class="quraan-hero__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+
+      {% if section.settings.cta_label != blank %}
+        <a href="{{ section.settings.cta_link }}" class="quraan-hero__cta button">
+          {{ section.settings.cta_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quraan · بطل الصفحة",
+  "tag": "section",
+  "class": "quraan-hero-wrapper",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "نص علوي صغير",
+      "default": "القرآن تدبر وعمل",
+      "info": "نص قصير يظهر فوق العنوان."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "العنوان الرئيسي",
+      "default": "مصحف يُقرأ بقلبٍ قبل العين"
+    },
+    {
+      "type": "text",
+      "id": "verse",
+      "label": "آية قرآنية",
+      "default": "﴿أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ﴾",
+      "info": "تظهر بخط مذهَّب بين الميدالية والوصف."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "وصف قصير",
+      "default": "نسخة بطباعة فاخرة، وتجليد متين، وألوانٍ مستلهمة من مخطوطات الأندلس."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "نص زر الدعوة",
+      "default": "اطلب نسختك الآن"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "رابط الزر",
+      "info": "اربط الزر بصفحة المنتج."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "صورة الخلفية (اختياري)",
+      "info": "إن تركتها فارغة، ستظهر خلفية القرمز الإمبراطوري."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "نظام الألوان",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "هامش علوي",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "هامش سفلي",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quraan · بطل الصفحة"
+    }
+  ]
+}
+{% endschema %}

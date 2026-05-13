@@ -1,0 +1,54 @@
+{% doc %}
+  Renders a COD (Cash on Delivery) trust badge for the Libyan market.
+  @example
+  {% content_for 'block', type: 'quraan-cod-trust', id: 'cod' %}
+{% enddoc %}
+
+{{ 'block-quraan-cod-trust.css' | asset_url | stylesheet_tag }}
+
+<div class="quraan-cod" {{ block.shopify_attributes }}>
+  <div class="quraan-cod__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+      <rect x="2" y="6" width="20" height="13" rx="2"/>
+      <circle cx="12" cy="12.5" r="2.5"/>
+      <path d="M5 9.5h.01M19 9.5h.01M5 15.5h.01M19 15.5h.01" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="quraan-cod__content">
+    <strong class="quraan-cod__title">{{ block.settings.title }}</strong>
+    <p class="quraan-cod__detail">{{ block.settings.detail }}</p>
+    {% if block.settings.phone_hint != blank %}
+      <p class="quraan-cod__phone">{{ block.settings.phone_hint }}</p>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quraan · COD",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "العنوان",
+      "default": "الدفع عند الاستلام"
+    },
+    {
+      "type": "textarea",
+      "id": "detail",
+      "label": "الوصف",
+      "default": "ادفع نقداً عند وصول الطلب — بدون رسوم مسبقة."
+    },
+    {
+      "type": "text",
+      "id": "phone_hint",
+      "label": "تنبيه رقم الهاتف",
+      "default": "سيتم التواصل معك على رقمك (+218) لتأكيد الطلب.",
+      "info": "يساعد العميل على تجهيز رقم هاتفه الليبي."
+    }
+  ],
+  "presets": [
+    { "name": "Quraan · COD" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,73 @@
+.quraan-testimonials {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  padding-block: var(--quraan-testimonials-padding-top, 80px) var(--quraan-testimonials-padding-bottom, 80px);
+}
+
+.quraan-testimonials__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.quraan-testimonials__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.quraan-testimonials__heading {
+  font-family: var(--font-heading--family, inherit);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  color: var(--color-foreground-heading);
+  margin: 0;
+}
+
+.quraan-testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.quraan-testimonials__card {
+  background: rgb(var(--color-background-rgb) / 0.5);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.quraan-testimonials__quote-mark {
+  font-family: var(--font-heading--family, inherit);
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--color-primary);
+  opacity: 0.5;
+}
+
+.quraan-testimonials__quote {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-foreground);
+  margin: 0;
+  font-style: normal;
+}
+
+.quraan-testimonials__name {
+  font-family: var(--font-subheading--family, inherit);
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  font-style: normal;
+  margin-top: auto;
+}
+
+@media (max-width: 989px) {
+  .quraan-testimonials__grid {
+    grid-template-columns: 1fr;
+  }
+}

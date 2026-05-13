@@ -1,0 +1,66 @@
+:root {
+  --quraan-color-crimson: #8B1C1C;
+  --quraan-color-burgundy: #5C1010;
+  --quraan-color-gold: #C8943A;
+  --quraan-color-gold-light: #E8B96A;
+  --quraan-color-emerald: #2B5C34;
+  --quraan-color-leaf: #3D7A48;
+  --quraan-color-ink: #1A0A05;
+  --quraan-color-ivory: #F2E8D0;
+  --quraan-color-parchment: #DDD0AA;
+}
+
+html[lang^="ar"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+html[lang^="ar"] {
+  font-feature-settings: "kern", "liga", "calt";
+}
+
+html[lang^="ar"] .quraan-flip-icon {
+  transform: scaleX(-1);
+}
+
+.quraan-ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px auto;
+  color: var(--quraan-color-gold);
+}
+
+.quraan-ornament-divider::before,
+.quraan-ornament-divider::after {
+  content: "";
+  flex: 0 0 48px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.quraan-ornament-divider__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.quraan-kicker {
+  font-family: var(--font-subheading--family, inherit);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--quraan-color-gold);
+  margin: 0 0 8px;
+}
+
+.quraan-verse {
+  font-family: var(--font-heading--family, inherit);
+  font-size: 1.5rem;
+  color: var(--quraan-color-gold);
+  margin: 16px 0;
+  line-height: 1.6;
+}

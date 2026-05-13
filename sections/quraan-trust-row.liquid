@@ -1,0 +1,111 @@
+{{ 'section-quraan-trust-row.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="quraan-trust color-{{ section.settings.color_scheme }}"
+  style="--quraan-trust-padding-top: {{ section.settings.padding_top }}px; --quraan-trust-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="quraan-trust__inner">
+    <ul class="quraan-trust__list" role="list">
+      <li class="quraan-trust__item">
+        <span class="quraan-trust__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 8h13v8H3z" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 11h4l1 3v2h-5z" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="7" cy="18" r="2"/>
+            <circle cx="18" cy="18" r="2"/>
+          </svg>
+        </span>
+        <strong class="quraan-trust__title">{{ section.settings.t1_title }}</strong>
+        <span class="quraan-trust__detail">{{ section.settings.t1_detail }}</span>
+      </li>
+      <li class="quraan-trust__item">
+        <span class="quraan-trust__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="6" width="18" height="13" rx="2"/>
+            <path d="M3 10h18" stroke-linecap="round"/>
+            <circle cx="12" cy="15" r="1.5"/>
+          </svg>
+        </span>
+        <strong class="quraan-trust__title">{{ section.settings.t2_title }}</strong>
+        <span class="quraan-trust__detail">{{ section.settings.t2_detail }}</span>
+      </li>
+      <li class="quraan-trust__item">
+        <span class="quraan-trust__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke-linejoin="round"/>
+            <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <strong class="quraan-trust__title">{{ section.settings.t3_title }}</strong>
+        <span class="quraan-trust__detail">{{ section.settings.t3_detail }}</span>
+      </li>
+      <li class="quraan-trust__item">
+        <span class="quraan-trust__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 4h12v16l-6-3-6 3V4z" stroke-linejoin="round"/>
+            <path d="M9 9h6M9 12h6" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <strong class="quraan-trust__title">{{ section.settings.t4_title }}</strong>
+        <span class="quraan-trust__detail">{{ section.settings.t4_detail }}</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quraan · شريط الثقة",
+  "tag": "section",
+  "class": "quraan-trust-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "العنصر الأول"
+    },
+    { "type": "text", "id": "t1_title", "label": "العنوان", "default": "شحن إلى كل ليبيا" },
+    { "type": "text", "id": "t1_detail", "label": "التفاصيل", "default": "من طرابلس إلى سبها" },
+    {
+      "type": "header",
+      "content": "العنصر الثاني"
+    },
+    { "type": "text", "id": "t2_title", "label": "العنوان", "default": "الدفع عند الاستلام" },
+    { "type": "text", "id": "t2_detail", "label": "التفاصيل", "default": "بدون أي رسوم مسبقة" },
+    {
+      "type": "header",
+      "content": "العنصر الثالث"
+    },
+    { "type": "text", "id": "t3_title", "label": "العنوان", "default": "ضمان الجودة" },
+    { "type": "text", "id": "t3_detail", "label": "التفاصيل", "default": "إرجاع خلال 7 أيام" },
+    {
+      "type": "header",
+      "content": "العنصر الرابع"
+    },
+    { "type": "text", "id": "t4_title", "label": "العنوان", "default": "مصحف معتمد" },
+    { "type": "text", "id": "t4_detail", "label": "التفاصيل", "default": "برواية حفص عن عاصم" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "نظام الألوان",
+      "default": "scheme-3"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "هامش علوي",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "هامش سفلي",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    { "name": "Quraan · شريط الثقة" }
+  ]
+}
+{% endschema %}

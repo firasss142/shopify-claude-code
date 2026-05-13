@@ -1,0 +1,100 @@
+{{ 'section-quraan-product-spotlight.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign product = section.settings.product
+-%}
+
+<section
+  class="quraan-spotlight color-{{ section.settings.color_scheme }}"
+  style="--quraan-spotlight-padding-top: {{ section.settings.padding_top }}px; --quraan-spotlight-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="quraan-spotlight__inner">
+    <div class="quraan-spotlight__media">
+      {%- if product != blank and product.featured_image != blank -%}
+        <a href="{{ product.url }}" class="quraan-spotlight__media-link">
+          {{ product.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'quraan-spotlight__image', alt: product.featured_image.alt | default: product.title }}
+        </a>
+      {%- else -%}
+        <div class="quraan-spotlight__placeholder" aria-hidden="true">
+          {{ 'product-apparel-1' | placeholder_svg_tag: 'quraan-spotlight__image' }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="quraan-spotlight__content">
+      {%- if section.settings.kicker != blank -%}
+        <p class="quraan-spotlight__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+
+      <h2 class="quraan-spotlight__heading">
+        {%- if product != blank -%}{{ product.title }}{%- else -%}{{ section.settings.heading }}{%- endif -%}
+      </h2>
+
+      {%- if section.settings.subtitle != blank -%}
+        <p class="quraan-spotlight__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      {%- if product != blank -%}
+        <p class="quraan-spotlight__price">
+          {%- if product.compare_at_price > product.price -%}
+            <span class="quraan-spotlight__price-sale">{{ product.price | money }}</span>
+            <s class="quraan-spotlight__price-compare">{{ product.compare_at_price | money }}</s>
+          {%- else -%}
+            {{ product.price | money }}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+
+      <a
+        href="{%- if product != blank -%}{{ product.url }}{%- else -%}{{ section.settings.cta_link }}{%- endif -%}"
+        class="quraan-spotlight__cta"
+      >
+        {{ section.settings.cta_label }}
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quraan · المنتج المميز",
+  "tag": "section",
+  "class": "quraan-spotlight-wrapper",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "اختر المنتج",
+      "info": "يتم عرض الصورة والسعر والعنوان تلقائياً."
+    },
+    { "type": "text", "id": "kicker", "label": "نص علوي", "default": "المنتج" },
+    { "type": "text", "id": "heading", "label": "العنوان (إن لم يتم اختيار منتج)", "default": "اختر نسختك" },
+    { "type": "textarea", "id": "subtitle", "label": "وصف قصير", "default": "اختر اللون والمقاس الذي يناسبك، ودع البركة تصلك إلى باب بيتك." },
+    { "type": "text", "id": "cta_label", "label": "نص الزر", "default": "اطلب الآن" },
+    { "type": "url", "id": "cta_link", "label": "رابط الزر (إن لم يتم اختيار منتج)" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "نظام الألوان",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "هامش علوي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "هامش سفلي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 100
+    }
+  ],
+  "presets": [
+    { "name": "Quraan · المنتج المميز" }
+  ]
+}
+{% endschema %}

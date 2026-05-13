@@ -1,0 +1,93 @@
+{{ 'section-quraan-feature-grid.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="quraan-features color-{{ section.settings.color_scheme }}"
+  style="--quraan-features-padding-top: {{ section.settings.padding_top }}px; --quraan-features-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="quraan-features__inner">
+    <header class="quraan-features__header">
+      {% if section.settings.kicker != blank %}
+        <p class="quraan-features__kicker">{{ section.settings.kicker }}</p>
+      {% endif %}
+      <h2 class="quraan-features__heading">{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading != blank %}
+        <p class="quraan-features__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </header>
+
+    <ul class="quraan-features__grid" role="list">
+      {% for i in (1..6) %}
+        {% assign title_key = 'f' | append: i | append: '_title' %}
+        {% assign text_key = 'f' | append: i | append: '_text' %}
+        {% assign title = section.settings[title_key] %}
+        {% assign text = section.settings[text_key] %}
+        {% if title != blank or text != blank %}
+          <li class="quraan-features__card">
+            <div class="quraan-features__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 4l2.5 5 5.5.8-4 3.9.9 5.5L12 16.5 7.1 19.2 8 13.7 4 9.8l5.5-.8L12 4z" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="quraan-features__title">{{ title }}</h3>
+            <p class="quraan-features__text">{{ text }}</p>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quraan · المزايا",
+  "tag": "section",
+  "class": "quraan-features-wrapper",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "نص علوي", "default": "المزايا" },
+    { "type": "text", "id": "heading", "label": "العنوان", "default": "لماذا هذا المصحف؟" },
+    { "type": "textarea", "id": "subheading", "label": "وصف قصير", "default": "تفاصيل دقيقة تجعل تجربة التلاوة أعمق" },
+    { "type": "header", "content": "ميزة 1" },
+    { "type": "text", "id": "f1_title", "label": "العنوان", "default": "خط واضح" },
+    { "type": "text", "id": "f1_text", "label": "النص", "default": "خط عثماني بحجم مريح للقراءة الطويلة." },
+    { "type": "header", "content": "ميزة 2" },
+    { "type": "text", "id": "f2_title", "label": "العنوان", "default": "ورق فاخر" },
+    { "type": "text", "id": "f2_text", "label": "النص", "default": "ورق كريمي مقاوم للشفافية وللتآكل." },
+    { "type": "header", "content": "ميزة 3" },
+    { "type": "text", "id": "f3_title", "label": "العنوان", "default": "تجليد متين" },
+    { "type": "text", "id": "f3_text", "label": "النص", "default": "غلاف صلب مع خياطة يدوية لتدوم سنوات." },
+    { "type": "header", "content": "ميزة 4" },
+    { "type": "text", "id": "f4_title", "label": "العنوان", "default": "تذهيب يدوي" },
+    { "type": "text", "id": "f4_text", "label": "النص", "default": "زخارف ذهبية على الغلاف وحواف الصفحات." },
+    { "type": "header", "content": "ميزة 5" },
+    { "type": "text", "id": "f5_title", "label": "العنوان", "default": "علامات مرجعية" },
+    { "type": "text", "id": "f5_text", "label": "النص", "default": "شريطان حريريان لتتبع التلاوة بسهولة." },
+    { "type": "header", "content": "ميزة 6" },
+    { "type": "text", "id": "f6_title", "label": "العنوان", "default": "هدية مثالية" },
+    { "type": "text", "id": "f6_text", "label": "النص", "default": "صندوق فاخر يجعله هدية تليق بالمناسبات." },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "نظام الألوان",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "هامش علوي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "هامش سفلي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    { "name": "Quraan · المزايا" }
+  ]
+}
+{% endschema %}

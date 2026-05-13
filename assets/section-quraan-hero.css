@@ -1,0 +1,120 @@
+.quraan-hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--quraan-hero-padding-top, 120px) var(--quraan-hero-padding-bottom, 100px);
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.quraan-hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin-inline: auto;
+  padding-inline: 24px;
+  text-align: center;
+}
+
+.quraan-hero__background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.quraan-hero__background-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quraan-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(var(--color-background-rgb) / 0.55) 0%, rgb(var(--color-background-rgb) / 0.85) 100%);
+}
+
+.quraan-hero__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.quraan-hero__kicker {
+  font-family: var(--font-subheading--family, inherit);
+  font-size: 0.875rem;
+  letter-spacing: 0.12em;
+  margin: 0;
+  color: var(--color-foreground-heading);
+  opacity: 0.85;
+}
+
+.quraan-hero__medallion {
+  width: clamp(120px, 18vw, 180px);
+  aspect-ratio: 1;
+  color: var(--color-foreground-heading);
+}
+
+.quraan-hero__medallion svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.quraan-hero__title {
+  font-family: var(--font-heading--family, inherit);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.25;
+  color: var(--color-foreground-heading);
+  margin: 8px 0 0;
+  max-width: 22ch;
+}
+
+.quraan-hero__verse {
+  font-family: var(--font-heading--family, inherit);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  color: var(--color-foreground-heading);
+  margin: 0;
+  opacity: 0.95;
+}
+
+.quraan-hero__subtitle {
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  line-height: 1.7;
+  max-width: 56ch;
+  color: var(--color-foreground);
+  margin: 0;
+}
+
+.quraan-hero__cta {
+  margin-top: 12px;
+  padding: 14px 36px;
+  font-family: var(--font-subheading--family, inherit);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  background: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+  border: 1px solid var(--color-primary-button-border);
+  border-radius: 14px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.quraan-hero__cta:hover,
+.quraan-hero__cta:focus-visible {
+  background: var(--color-primary-button-hover-background);
+  color: var(--color-primary-button-hover-text);
+  border-color: var(--color-primary-button-hover-border);
+}
+
+@media (max-width: 749px) {
+  .quraan-hero {
+    padding-block: 80px 64px;
+  }
+
+  .quraan-hero__inner {
+    padding-inline: 16px;
+  }
+}

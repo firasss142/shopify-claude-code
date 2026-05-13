@@ -1,0 +1,76 @@
+.quraan-faq {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  padding-block: var(--quraan-faq-padding-top, 80px) var(--quraan-faq-padding-bottom, 80px);
+}
+
+.quraan-faq__inner {
+  max-width: 800px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.quraan-faq__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.quraan-faq__heading {
+  font-family: var(--font-heading--family, inherit);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  color: var(--color-foreground-heading);
+  margin: 0;
+}
+
+.quraan-faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quraan-faq__item {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(var(--color-background-rgb) / 0.6);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.quraan-faq__item[open] {
+  border-color: var(--color-primary);
+}
+
+.quraan-faq__question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  font-family: var(--font-subheading--family, inherit);
+  font-size: 1.0625rem;
+  color: var(--color-foreground-heading);
+  cursor: pointer;
+  list-style: none;
+}
+
+.quraan-faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.quraan-faq__icon {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.quraan-faq__item[open] .quraan-faq__icon {
+  transform: rotate(45deg);
+}
+
+.quraan-faq__answer {
+  padding: 0 24px 20px;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-foreground);
+}

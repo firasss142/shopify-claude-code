@@ -1,0 +1,111 @@
+.quraan-spotlight {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  padding-block: var(--quraan-spotlight-padding-top, 100px) var(--quraan-spotlight-padding-bottom, 100px);
+}
+
+.quraan-spotlight__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.quraan-spotlight__media {
+  aspect-ratio: 1;
+  border: 2px solid var(--color-primary);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgb(var(--color-foreground-rgb) / 0.04);
+}
+
+.quraan-spotlight__media-link,
+.quraan-spotlight__placeholder {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.quraan-spotlight__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quraan-spotlight__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.quraan-spotlight__kicker {
+  font-family: var(--font-subheading--family, inherit);
+  font-size: 0.875rem;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.quraan-spotlight__heading {
+  font-family: var(--font-heading--family, inherit);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  color: var(--color-foreground-heading);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.quraan-spotlight__subtitle {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-foreground);
+  margin: 0;
+}
+
+.quraan-spotlight__price {
+  font-family: var(--font-heading--family, inherit);
+  font-size: 1.75rem;
+  color: var(--color-foreground-heading);
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.quraan-spotlight__price-sale {
+  color: var(--color-primary);
+}
+
+.quraan-spotlight__price-compare {
+  font-size: 1.125rem;
+  opacity: 0.6;
+}
+
+.quraan-spotlight__cta {
+  align-self: flex-start;
+  padding: 16px 40px;
+  font-family: var(--font-subheading--family, inherit);
+  font-size: 1.0625rem;
+  letter-spacing: 0.04em;
+  background: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+  border: 1px solid var(--color-primary-button-border);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.quraan-spotlight__cta:hover,
+.quraan-spotlight__cta:focus-visible {
+  background: var(--color-primary-button-hover-background);
+  color: var(--color-primary-button-hover-text);
+}
+
+@media (max-width: 749px) {
+  .quraan-spotlight__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}

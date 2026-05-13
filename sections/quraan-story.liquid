@@ -1,0 +1,86 @@
+{{ 'section-quraan-story.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="quraan-story color-{{ section.settings.color_scheme }}"
+  style="--quraan-story-padding-top: {{ section.settings.padding_top }}px; --quraan-story-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="quraan-story__inner">
+    <div class="quraan-story__media">
+      {% if section.settings.image != blank %}
+        {{
+          section.settings.image
+          | image_url: width: 1200
+          | image_tag: loading: 'lazy', class: 'quraan-story__image', alt: section.settings.image.alt
+        }}
+      {% else %}
+        <div class="quraan-story__placeholder" aria-hidden="true">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="20" width="160" height="160" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M40 40 L160 40 L160 160 L40 160 Z M40 100 L160 100 M100 40 L100 160" stroke="currentColor" stroke-width="0.6" fill="none"/>
+            <circle cx="100" cy="100" r="40" fill="none" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="quraan-story__content">
+      {% if section.settings.kicker != blank %}
+        <p class="quraan-story__kicker">{{ section.settings.kicker }}</p>
+      {% endif %}
+      <h2 class="quraan-story__heading">{{ section.settings.heading }}</h2>
+      <div class="quraan-story__body">
+        {{ section.settings.body }}
+      </div>
+      {% if section.settings.cta_label != blank %}
+        <a href="{{ section.settings.cta_link }}" class="quraan-story__cta">
+          {{ section.settings.cta_label }}
+          <span aria-hidden="true" class="quraan-flip-icon">←</span>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quraan · القصة",
+  "tag": "section",
+  "class": "quraan-story-wrapper",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "نص علوي", "default": "قصة المصحف" },
+    { "type": "text", "id": "heading", "label": "العنوان", "default": "إرثٌ من النور" },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "النص",
+      "default": "<p>ولِد هذا المصحف من شغفٍ بإحياء جمال المخطوطات الإسلامية القديمة، حين كان الخطاطون يقضون السنين في نسخ آيات الله بأناةٍ ودقّة. كل تفصيلٍ في غلافه وزخرفته مستوحى من تقاليد امتدت قروناً، لنقدّم بين يديك مصحفاً يُكرم القرآن قبل أن يُكرم القارئ.</p>"
+    },
+    { "type": "image_picker", "id": "image", "label": "صورة المصحف" },
+    { "type": "text", "id": "cta_label", "label": "نص الرابط", "default": "اطلب نسختك" },
+    { "type": "url", "id": "cta_link", "label": "رابط الزر" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "نظام الألوان",
+      "default": "scheme-3"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "هامش علوي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "هامش سفلي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    { "name": "Quraan · القصة" }
+  ]
+}
+{% endschema %}

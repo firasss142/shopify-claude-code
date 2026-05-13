@@ -1,0 +1,41 @@
+{% doc %}
+  Renders shipping info card with Libya-specific delivery details.
+  @example
+  {% content_for 'block', type: 'quraan-shipping-info', id: 'shipping' %}
+{% enddoc %}
+
+{{ 'block-quraan-shipping-info.css' | asset_url | stylesheet_tag }}
+
+<div class="quraan-shipping" {{ block.shopify_attributes }}>
+  <div class="quraan-shipping__header">
+    <div class="quraan-shipping__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M3 8h13v8H3z" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 11h4l1 3v2h-5z" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="7" cy="18" r="2"/>
+        <circle cx="18" cy="18" r="2"/>
+      </svg>
+    </div>
+    <strong class="quraan-shipping__title">{{ block.settings.title }}</strong>
+  </div>
+  <ul class="quraan-shipping__list">
+    {% if block.settings.line_1 != blank %}<li>{{ block.settings.line_1 }}</li>{% endif %}
+    {% if block.settings.line_2 != blank %}<li>{{ block.settings.line_2 }}</li>{% endif %}
+    {% if block.settings.line_3 != blank %}<li>{{ block.settings.line_3 }}</li>{% endif %}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Quraan · شحن",
+  "settings": [
+    { "type": "text", "id": "title", "label": "العنوان", "default": "معلومات الشحن" },
+    { "type": "text", "id": "line_1", "label": "سطر 1", "default": "شحن إلى جميع المدن الليبية." },
+    { "type": "text", "id": "line_2", "label": "سطر 2", "default": "مدة التوصيل: 2 - 5 أيام عمل." },
+    { "type": "text", "id": "line_3", "label": "سطر 3", "default": "تغليف آمن يحفظ المصحف من الانثناء والرطوبة." }
+  ],
+  "presets": [
+    { "name": "Quraan · شحن" }
+  ]
+}
+{% endschema %}

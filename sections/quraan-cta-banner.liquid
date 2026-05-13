@@ -1,0 +1,55 @@
+{{ 'section-quraan-cta-banner.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="quraan-cta color-{{ section.settings.color_scheme }}"
+  style="--quraan-cta-padding-top: {{ section.settings.padding_top }}px; --quraan-cta-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="quraan-cta__inner">
+    <h2 class="quraan-cta__title">{{ section.settings.title }}</h2>
+    {% if section.settings.subtitle != blank %}
+      <p class="quraan-cta__subtitle">{{ section.settings.subtitle }}</p>
+    {% endif %}
+    {% if section.settings.cta_label != blank %}
+      <a href="{{ section.settings.cta_link }}" class="quraan-cta__button">
+        {{ section.settings.cta_label }}
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quraan · CTA",
+  "tag": "section",
+  "class": "quraan-cta-wrapper",
+  "settings": [
+    { "type": "text", "id": "title", "label": "العنوان", "default": "ابدأ يومك بآيةٍ من نور" },
+    { "type": "text", "id": "subtitle", "label": "الوصف", "default": "اطلب مصحفك اليوم، وادفع عند الاستلام." },
+    { "type": "text", "id": "cta_label", "label": "نص الزر", "default": "اطلب الآن" },
+    { "type": "url", "id": "cta_link", "label": "رابط الزر" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "نظام الألوان",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "هامش علوي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "هامش سفلي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 96
+    }
+  ],
+  "presets": [
+    { "name": "Quraan · CTA" }
+  ]
+}
+{% endschema %}

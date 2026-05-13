@@ -1,0 +1,103 @@
+.quraan-story {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  padding-block: var(--quraan-story-padding-top, 80px) var(--quraan-story-padding-bottom, 80px);
+}
+
+.quraan-story__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.quraan-story__media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.quraan-story__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.quraan-story__placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: rgb(var(--color-foreground-rgb) / 0.04);
+  color: var(--color-primary);
+}
+
+.quraan-story__placeholder svg {
+  width: 60%;
+  height: auto;
+  opacity: 0.6;
+}
+
+.quraan-story__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.quraan-story__kicker {
+  font-family: var(--font-subheading--family, inherit);
+  font-size: 0.875rem;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.quraan-story__heading {
+  font-family: var(--font-heading--family, inherit);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  color: var(--color-foreground-heading);
+  margin: 0;
+}
+
+.quraan-story__body {
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--color-foreground);
+}
+
+.quraan-story__body p {
+  margin: 0 0 12px;
+}
+
+.quraan-story__cta {
+  align-self: flex-start;
+  font-family: var(--font-subheading--family, inherit);
+  font-size: 1rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quraan-story__cta:hover {
+  color: var(--color-primary-hover);
+}
+
+@media (max-width: 749px) {
+  .quraan-story__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .quraan-story__media {
+    aspect-ratio: 3 / 4;
+    max-height: 500px;
+  }
+}

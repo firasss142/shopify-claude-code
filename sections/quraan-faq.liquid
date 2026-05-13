@@ -1,0 +1,82 @@
+{{ 'section-quraan-faq.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="quraan-faq color-{{ section.settings.color_scheme }}"
+  style="--quraan-faq-padding-top: {{ section.settings.padding_top }}px; --quraan-faq-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="quraan-faq__inner">
+    <header class="quraan-faq__header">
+      <h2 class="quraan-faq__heading">{{ section.settings.heading }}</h2>
+    </header>
+
+    <div class="quraan-faq__list">
+      {% for i in (1..6) %}
+        {% assign q_key = 'q' | append: i %}
+        {% assign a_key = 'a' | append: i %}
+        {% assign question = section.settings[q_key] %}
+        {% assign answer = section.settings[a_key] %}
+        {% if question != blank %}
+          <details class="quraan-faq__item">
+            <summary class="quraan-faq__question">
+              <span>{{ question }}</span>
+              <span class="quraan-faq__icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="quraan-faq__answer">{{ answer }}</div>
+          </details>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quraan · الأسئلة الشائعة",
+  "tag": "section",
+  "class": "quraan-faq-wrapper",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "العنوان", "default": "الأسئلة الشائعة" },
+    { "type": "header", "content": "سؤال 1" },
+    { "type": "text", "id": "q1", "label": "السؤال", "default": "هل الدفع عند الاستلام متاح؟" },
+    { "type": "textarea", "id": "a1", "label": "الإجابة", "default": "نعم، الدفع عند الاستلام متاح في جميع المدن الليبية بدون أي رسوم إضافية." },
+    { "type": "header", "content": "سؤال 2" },
+    { "type": "text", "id": "q2", "label": "السؤال", "default": "كم تستغرق مدة التوصيل؟" },
+    { "type": "textarea", "id": "a2", "label": "الإجابة", "default": "عادة بين 2 و 5 أيام عمل حسب المدينة، ونحرص على تأمين المصحف داخل تغليف ملائم." },
+    { "type": "header", "content": "سؤال 3" },
+    { "type": "text", "id": "q3", "label": "السؤال", "default": "ما رواية المصحف؟" },
+    { "type": "textarea", "id": "a3", "label": "الإجابة", "default": "المصحف بطباعة المدينة المنورة، برواية حفص عن عاصم." },
+    { "type": "header", "content": "سؤال 4" },
+    { "type": "text", "id": "q4", "label": "السؤال", "default": "هل يمكنني إرجاع المصحف؟" },
+    { "type": "textarea", "id": "a4", "label": "الإجابة", "default": "نعم، يمكنك الإرجاع خلال 7 أيام من الاستلام شرط أن يكون في حالته الأصلية." },
+    { "type": "header", "content": "سؤال 5" },
+    { "type": "text", "id": "q5", "label": "السؤال", "default": "كيف أتواصل معكم؟" },
+    { "type": "textarea", "id": "a5", "label": "الإجابة", "default": "يمكنك التواصل معنا عبر واتساب أو الاتصال على الرقم المخصص لخدمة العملاء." },
+    { "type": "header", "content": "سؤال 6 (اختياري)" },
+    { "type": "text", "id": "q6", "label": "السؤال" },
+    { "type": "textarea", "id": "a6", "label": "الإجابة" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "نظام الألوان",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "هامش علوي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "هامش سفلي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    { "name": "Quraan · الأسئلة الشائعة" }
+  ]
+}
+{% endschema %}

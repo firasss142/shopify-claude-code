@@ -1,290 +1,139 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */{
+{
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
-      "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-secondary",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
-      ],
-      "name": "t:names.hero",
+    "quraan_hero": {
+      "type": "quraan-hero",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-6",
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
+        "kicker": "القرآن تدبر وعمل",
+        "title": "مصحف يُقرأ بقلبٍ قبل العين",
+        "verse": "﴿أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ﴾",
+        "subtitle": "نسخة بطباعة فاخرة، وتجليد متين، وألوانٍ مستلهمة من مخطوطات الأندلس.",
+        "cta_label": "اطلب نسختك الآن",
+        "cta_link": "shopify://collections/all",
+        "color_scheme": "scheme-2",
+        "padding_top": 120,
+        "padding_bottom": 100
       }
     },
-    "product_list_fa6P9H": {
-      "type": "product-list",
-      "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 4,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
-        }
-      },
-      "name": "Featured collection",
+    "quraan_trust": {
+      "type": "quraan-trust-row",
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
+        "t1_title": "شحن إلى كل ليبيا",
+        "t1_detail": "من طرابلس إلى سبها",
+        "t2_title": "الدفع عند الاستلام",
+        "t2_detail": "بدون أي رسوم مسبقة",
+        "t3_title": "ضمان الجودة",
+        "t3_detail": "إرجاع خلال 7 أيام",
+        "t4_title": "مصحف معتمد",
+        "t4_detail": "برواية حفص عن عاصم",
+        "color_scheme": "scheme-3",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "quraan_features": {
+      "type": "quraan-feature-grid",
+      "settings": {
+        "kicker": "المزايا",
+        "heading": "لماذا هذا المصحف؟",
+        "subheading": "تفاصيل دقيقة تجعل تجربة التلاوة أعمق",
+        "f1_title": "خط واضح",
+        "f1_text": "خط عثماني بحجم مريح للقراءة الطويلة.",
+        "f2_title": "ورق فاخر",
+        "f2_text": "ورق كريمي مقاوم للشفافية وللتآكل.",
+        "f3_title": "تجليد متين",
+        "f3_text": "غلاف صلب مع خياطة يدوية لتدوم سنوات.",
+        "f4_title": "تذهيب يدوي",
+        "f4_text": "زخارف ذهبية على الغلاف وحواف الصفحات.",
+        "f5_title": "علامات مرجعية",
+        "f5_text": "شريطان حريريان لتتبع التلاوة بسهولة.",
+        "f6_title": "هدية مثالية",
+        "f6_text": "صندوق فاخر يجعله هدية تليق بالمناسبات.",
         "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "quraan_story": {
+      "type": "quraan-story",
+      "settings": {
+        "kicker": "قصة المصحف",
+        "heading": "إرثٌ من النور",
+        "body": "<p>ولِد هذا المصحف من شغفٍ بإحياء جمال المخطوطات الإسلامية القديمة، حين كان الخطاطون يقضون السنين في نسخ آيات الله بأناةٍ ودقّة. كل تفصيلٍ في غلافه وزخرفته مستوحى من تقاليد امتدت قروناً، لنقدّم بين يديك مصحفاً يُكرم القرآن قبل أن يُكرم القارئ.</p>",
+        "cta_label": "اطلب نسختك",
+        "cta_link": "shopify://collections/all",
+        "color_scheme": "scheme-3",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "quraan_spotlight": {
+      "type": "quraan-product-spotlight",
+      "settings": {
+        "kicker": "المنتج",
+        "heading": "اختر نسختك",
+        "subtitle": "اختر اللون والمقاس الذي يناسبك، ودع البركة تصلك إلى باب بيتك.",
+        "cta_label": "اطلب الآن",
+        "cta_link": "shopify://collections/all",
+        "color_scheme": "scheme-2",
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    },
+    "quraan_testimonials": {
+      "type": "quraan-testimonials",
+      "settings": {
+        "heading": "ماذا قال عملاؤنا",
+        "t1_quote": "وصلني المصحف بحالة ممتازة، التجليد قوي والورق رائع. سعدت جداً بالشراء.",
+        "t1_name": "أحمد - طرابلس",
+        "t2_quote": "أجمل هدية قدمتها لوالدتي. التذهيب على الغلاف رائع، والخط واضح بشكل مريح.",
+        "t2_name": "فاطمة - بنغازي",
+        "t3_quote": "الدفع عند الاستلام أراحني، والشحن وصل أسرع مما توقعت. أنصح به بشدة.",
+        "t3_name": "محمد - مصراتة",
+        "color_scheme": "scheme-3",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "quraan_faq": {
+      "type": "quraan-faq",
+      "settings": {
+        "heading": "الأسئلة الشائعة",
+        "q1": "هل الدفع عند الاستلام متاح؟",
+        "a1": "نعم، الدفع عند الاستلام متاح في جميع المدن الليبية بدون أي رسوم إضافية.",
+        "q2": "كم تستغرق مدة التوصيل؟",
+        "a2": "عادة بين 2 و 5 أيام عمل حسب المدينة، ونحرص على تأمين المصحف داخل تغليف ملائم.",
+        "q3": "ما رواية المصحف؟",
+        "a3": "المصحف بطباعة المدينة المنورة، برواية حفص عن عاصم.",
+        "q4": "هل يمكنني إرجاع المصحف؟",
+        "a4": "نعم، يمكنك الإرجاع خلال 7 أيام من الاستلام شرط أن يكون في حالته الأصلية.",
+        "q5": "كيف أتواصل معكم؟",
+        "a5": "يمكنك التواصل معنا عبر واتساب أو الاتصال على الرقم المخصص لخدمة العملاء.",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "quraan_cta": {
+      "type": "quraan-cta-banner",
+      "settings": {
+        "title": "ابدأ يومك بآيةٍ من نور",
+        "subtitle": "اطلب مصحفك اليوم، وادفع عند الاستلام.",
+        "cta_label": "اطلب الآن",
+        "cta_link": "shopify://collections/all",
+        "color_scheme": "scheme-2",
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "quraan_hero",
+    "quraan_trust",
+    "quraan_features",
+    "quraan_story",
+    "quraan_spotlight",
+    "quraan_testimonials",
+    "quraan_faq",
+    "quraan_cta"
   ]
 }
