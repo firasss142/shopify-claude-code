@@ -4,18 +4,31 @@
 
 {%- liquid
   assign product = section.settings.product | default: closest.product
-  assign variants = product.variants
-  assign v1 = variants[0]
-  assign v2 = variants[1]
-  assign v3 = variants[2]
-  if variants.size == 1
-    assign v2 = nil
-    assign v3 = nil
+  assign default_variant = product.selected_or_first_available_variant
+  assign unit_price = default_variant.price
+  assign unit_compare = default_variant.compare_at_price | default: unit_price
+
+  # Each bundle tier: quantity × per-tier price override (in cents). If override is blank/0, fall back to unit_price × qty.
+  assign b1_qty = section.settings.bundle_1_quantity | default: 1
+  assign b2_qty = section.settings.bundle_2_quantity | default: 2
+  assign b3_qty = section.settings.bundle_3_quantity | default: 3
+
+  assign b1_price = section.settings.bundle_1_price | times: 100
+  if b1_price == 0
+    assign b1_price = unit_price | times: b1_qty
   endif
-  if variants.size == 2
-    assign v3 = nil
+  assign b2_price = section.settings.bundle_2_price | times: 100
+  if b2_price == 0
+    assign b2_price = unit_price | times: b2_qty
   endif
-  assign default_variant = v1 | default: product.selected_or_first_available_variant
+  assign b3_price = section.settings.bundle_3_price | times: 100
+  if b3_price == 0
+    assign b3_price = unit_price | times: b3_qty
+  endif
+
+  assign b1_compare = unit_compare | times: b1_qty
+  assign b2_compare = unit_compare | times: b2_qty
+  assign b3_compare = unit_compare | times: b3_qty
 
   assign cities = 'طرابلس,بنغازي,مصراتة,سرت,سبها,البيضاء,طبرق,الزاوية,زليتن,صبراتة,الخمس,زوارة,درنة,اجدابيا,ترهونة,بني وليد,غريان,تاجوراء,جنزور,السراج,حي الاندلس,الهضبة طول,الترسانة,السبعة,بوستة,قصر بن غشير,سوق السبت,سوق الخميس امسيحل,اسبيعة,سبيعة,السايح,قصر خيار,القربوللي,العلوص,القويعة,قماطه,مسلاتة,غوط الرمان,وادي كعام,صرمان,الجميل,ابوكماش,رقدالين,راس جدير,العجيلات,زلطن,ابوعيسي,الماية,المطرد,جدائم,كوبري 27,الطويلة,ورشفانه,الناصرية,سيدي السايح,ضواحي طرابلس,الزنتان,الرجبان,الرياينة,كاباو,نالوت,طمزين,جادو,العوينية,الرحيبات,تيجي,يفرن,الجوش,بدر,القلعة,الجبل الغربي,وازن,غدامس,الاصابعة,الرابطة,مزدة,نسمة,راس لانوف,البريقة,بن جواد,السدرة,العقيلة,هراوة,ابوقرين,براك الشاطيء,الشويرف,اوباري,مرزق,غات,القطرون,ام الارانب,الغريفة,الشقيقة,تراغن,هون,ودان,سوكنة,زلة,الفقهاء,الجفرة,المرج,شحات,الابرق,سوسة,التميمي,توكرة,قصر ليبيا,مسة,المقرون,دريانة,القبة,الرجمة,البياضة,سلوق,قمينس,الابيار,امساعد,سيدي خليفة,جالو,اوجلة,الكفرة,تازربو,اجخرة,مكتب طرابلس,مكتب سبها' | split: ','
 -%}
@@ -105,96 +118,90 @@
         <fieldset class="quraan-buybox__bundle-list">
           <legend class="visually-hidden">{{ section.settings.bundles_heading }}</legend>
 
-          {%- if v1 != blank -%}
-            <label class="quraan-buybox__bundle {% if v1.available == false %}is-unavailable{% endif %}">
-              <input
-                type="radio"
-                name="quraan_bundle"
-                value="{{ v1.id }}"
-                data-quantity="{{ section.settings.bundle_1_quantity | default: 1 }}"
-                data-price="{{ v1.price }}"
-                data-compare-at="{{ v1.compare_at_price }}"
-                {% if v1.available == false %}disabled{% endif %}
-                checked
-              >
-              <span class="quraan-buybox__bundle-card">
-                <span class="quraan-buybox__bundle-label">{{ section.settings.bundle_1_label }}</span>
-                {%- if section.settings.bundle_1_badge != blank -%}
-                  <span class="quraan-buybox__bundle-badge">{{ section.settings.bundle_1_badge }}</span>
+          <label class="quraan-buybox__bundle {% if default_variant.available == false %}is-unavailable{% endif %}">
+            <input
+              type="radio"
+              name="quraan_bundle"
+              value="{{ default_variant.id }}"
+              data-quantity="{{ b1_qty }}"
+              data-price="{{ b1_price }}"
+              data-compare-at="{{ b1_compare }}"
+              {% if default_variant.available == false %}disabled{% endif %}
+              checked
+            >
+            <span class="quraan-buybox__bundle-card">
+              <span class="quraan-buybox__bundle-label">{{ section.settings.bundle_1_label }}</span>
+              {%- if section.settings.bundle_1_badge != blank -%}
+                <span class="quraan-buybox__bundle-badge">{{ section.settings.bundle_1_badge }}</span>
+              {%- endif -%}
+              <span class="quraan-buybox__bundle-prices">
+                {%- if b1_compare > b1_price -%}
+                  <s class="quraan-buybox__bundle-compare">{{ b1_compare | money }}</s>
                 {%- endif -%}
-                <span class="quraan-buybox__bundle-prices">
-                  {%- if v1.compare_at_price > v1.price -%}
-                    <s class="quraan-buybox__bundle-compare">{{ v1.compare_at_price | money }}</s>
-                  {%- endif -%}
-                  <strong class="quraan-buybox__bundle-price">{{ v1.price | money }}</strong>
-                </span>
+                <strong class="quraan-buybox__bundle-price">{{ b1_price | money }}</strong>
               </span>
-            </label>
-          {%- endif -%}
+            </span>
+          </label>
 
-          {%- if v2 != blank -%}
-            <label class="quraan-buybox__bundle {% if v2.available == false %}is-unavailable{% endif %}">
-              <input
-                type="radio"
-                name="quraan_bundle"
-                value="{{ v2.id }}"
-                data-quantity="{{ section.settings.bundle_2_quantity | default: 1 }}"
-                data-price="{{ v2.price }}"
-                data-compare-at="{{ v2.compare_at_price }}"
-                {% if v2.available == false %}disabled{% endif %}
-              >
-              <span class="quraan-buybox__bundle-card">
-                <span class="quraan-buybox__bundle-label">{{ section.settings.bundle_2_label }}</span>
-                {%- if section.settings.bundle_2_badge != blank -%}
-                  <span class="quraan-buybox__bundle-badge">{{ section.settings.bundle_2_badge }}</span>
+          <label class="quraan-buybox__bundle {% if default_variant.available == false %}is-unavailable{% endif %}">
+            <input
+              type="radio"
+              name="quraan_bundle"
+              value="{{ default_variant.id }}"
+              data-quantity="{{ b2_qty }}"
+              data-price="{{ b2_price }}"
+              data-compare-at="{{ b2_compare }}"
+              {% if default_variant.available == false %}disabled{% endif %}
+            >
+            <span class="quraan-buybox__bundle-card">
+              <span class="quraan-buybox__bundle-label">{{ section.settings.bundle_2_label }}</span>
+              {%- if section.settings.bundle_2_badge != blank -%}
+                <span class="quraan-buybox__bundle-badge">{{ section.settings.bundle_2_badge }}</span>
+              {%- endif -%}
+              <span class="quraan-buybox__bundle-prices">
+                {%- if b2_compare > b2_price -%}
+                  <s class="quraan-buybox__bundle-compare">{{ b2_compare | money }}</s>
                 {%- endif -%}
-                <span class="quraan-buybox__bundle-prices">
-                  {%- if v2.compare_at_price > v2.price -%}
-                    <s class="quraan-buybox__bundle-compare">{{ v2.compare_at_price | money }}</s>
-                  {%- endif -%}
-                  <strong class="quraan-buybox__bundle-price">{{ v2.price | money }}</strong>
-                </span>
+                <strong class="quraan-buybox__bundle-price">{{ b2_price | money }}</strong>
               </span>
-            </label>
-          {%- endif -%}
+            </span>
+          </label>
 
-          {%- if v3 != blank -%}
-            <label class="quraan-buybox__bundle quraan-buybox__bundle--featured {% if v3.available == false %}is-unavailable{% endif %}">
-              <input
-                type="radio"
-                name="quraan_bundle"
-                value="{{ v3.id }}"
-                data-quantity="{{ section.settings.bundle_3_quantity | default: 1 }}"
-                data-price="{{ v3.price }}"
-                data-compare-at="{{ v3.compare_at_price }}"
-                {% if v3.available == false %}disabled{% endif %}
-              >
-              <span class="quraan-buybox__bundle-card">
-                <span class="quraan-buybox__bundle-label">{{ section.settings.bundle_3_label }}</span>
-                {%- if section.settings.bundle_3_badge != blank -%}
-                  <span class="quraan-buybox__bundle-badge">{{ section.settings.bundle_3_badge }}</span>
+          <label class="quraan-buybox__bundle quraan-buybox__bundle--featured {% if default_variant.available == false %}is-unavailable{% endif %}">
+            <input
+              type="radio"
+              name="quraan_bundle"
+              value="{{ default_variant.id }}"
+              data-quantity="{{ b3_qty }}"
+              data-price="{{ b3_price }}"
+              data-compare-at="{{ b3_compare }}"
+              {% if default_variant.available == false %}disabled{% endif %}
+            >
+            <span class="quraan-buybox__bundle-card">
+              <span class="quraan-buybox__bundle-label">{{ section.settings.bundle_3_label }}</span>
+              {%- if section.settings.bundle_3_badge != blank -%}
+                <span class="quraan-buybox__bundle-badge">{{ section.settings.bundle_3_badge }}</span>
+              {%- endif -%}
+              <span class="quraan-buybox__bundle-prices">
+                {%- if b3_compare > b3_price -%}
+                  <s class="quraan-buybox__bundle-compare">{{ b3_compare | money }}</s>
                 {%- endif -%}
-                <span class="quraan-buybox__bundle-prices">
-                  {%- if v3.compare_at_price > v3.price -%}
-                    <s class="quraan-buybox__bundle-compare">{{ v3.compare_at_price | money }}</s>
-                  {%- endif -%}
-                  <strong class="quraan-buybox__bundle-price">{{ v3.price | money }}</strong>
-                </span>
+                <strong class="quraan-buybox__bundle-price">{{ b3_price | money }}</strong>
               </span>
-            </label>
-          {%- endif -%}
+            </span>
+          </label>
         </fieldset>
 
         {%- comment -%} ===== Live summary ===== {%- endcomment -%}
         <dl class="quraan-buybox__summary">
           <div class="quraan-buybox__summary-row">
             <dt>{{ section.settings.summary_subtotal_label }}</dt>
-            <dd data-buybox-subtotal>{{ default_variant.compare_at_price | default: default_variant.price | money }}</dd>
+            <dd data-buybox-subtotal>{{ b1_compare | money }}</dd>
           </div>
-          <div class="quraan-buybox__summary-row" data-buybox-discount-row {% if default_variant.compare_at_price <= default_variant.price %}hidden{% endif %}>
+          <div class="quraan-buybox__summary-row" data-buybox-discount-row {% if b1_compare <= b1_price %}hidden{% endif %}>
             <dt>{{ section.settings.summary_discount_label }}</dt>
             <dd data-buybox-discount class="quraan-buybox__summary-discount">
-              {%- assign discount = default_variant.compare_at_price | minus: default_variant.price -%}
+              {%- assign discount = b1_compare | minus: b1_price -%}
               -{{ discount | money }}
             </dd>
           </div>
@@ -204,7 +211,7 @@
           </div>
           <div class="quraan-buybox__summary-row quraan-buybox__summary-row--total">
             <dt>{{ section.settings.summary_total_label }}</dt>
-            <dd data-buybox-total>{{ default_variant.price | money }}</dd>
+            <dd data-buybox-total>{{ b1_price | money }}</dd>
           </div>
         </dl>
       </div>
@@ -407,17 +414,20 @@
     },
     {
       "type": "paragraph",
-      "content": "البطاقات الثلاث ترتبط تلقائياً بأول 3 نسخ (variants) من المنتج المحدد. أنشئ في الإدارة نسخة لكل كمية (1 نسخة، نسختان، 3 نسخ) بأسعارها المختلفة."
+      "content": "كل باقة تضيف نفس المنتج بعدد محدد. حدد سعر الباقة (مثلاً سعر النسختين معاً بعد الخصم). اتركه فارغاً ليُحسب تلقائياً = سعر الوحدة × الكمية."
     },
     { "type": "text", "id": "bundle_1_label", "label": "اسم الباقة 1", "default": "نسخة واحدة" },
     { "type": "text", "id": "bundle_1_badge", "label": "وسم الباقة 1" },
-    { "type": "number", "id": "bundle_1_quantity", "label": "الكمية المباعة", "default": 1, "info": "العدد الفعلي الذي يضاف للسلة عند اختيار هذه الباقة." },
+    { "type": "number", "id": "bundle_1_quantity", "label": "الكمية", "default": 1 },
+    { "type": "number", "id": "bundle_1_price", "label": "سعر الباقة 1 (اختياري)", "info": "بالعملة الأساسية، مثل 80 — اتركه فارغاً للحساب التلقائي." },
     { "type": "text", "id": "bundle_2_label", "label": "اسم الباقة 2", "default": "نسختان" },
     { "type": "text", "id": "bundle_2_badge", "label": "وسم الباقة 2", "default": "+ شحن مجاني" },
-    { "type": "number", "id": "bundle_2_quantity", "label": "الكمية المباعة", "default": 1 },
+    { "type": "number", "id": "bundle_2_quantity", "label": "الكمية", "default": 2 },
+    { "type": "number", "id": "bundle_2_price", "label": "سعر الباقة 2 (اختياري)" },
     { "type": "text", "id": "bundle_3_label", "label": "اسم الباقة 3", "default": "ثلاث نسخ" },
     { "type": "text", "id": "bundle_3_badge", "label": "وسم الباقة 3", "default": "الأكثر توفيراً" },
-    { "type": "number", "id": "bundle_3_quantity", "label": "الكمية المباعة", "default": 1 },
+    { "type": "number", "id": "bundle_3_quantity", "label": "الكمية", "default": 3 },
+    { "type": "number", "id": "bundle_3_price", "label": "سعر الباقة 3 (اختياري)" },
 
     { "type": "header", "content": "ملخص الطلب" },
     { "type": "text", "id": "summary_subtotal_label", "label": "المجموع الفرعي", "default": "المجموع الفرعي" },
