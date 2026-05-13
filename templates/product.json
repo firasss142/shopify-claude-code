@@ -12,6 +12,7 @@
     "quraan_buybox": {
       "type": "quraan-product-buybox",
       "settings": {
+        "product": "quran",
         "fallback_title": "المصحف الشريف",
         "show_rating": true,
         "rating_value": "4.9",
@@ -46,6 +47,14 @@
         "label_address": "العنوان التفصيلي",
         "submit_label": "اطلب الآن",
         "purchases_pill": "أكثر من 639 طلباً خلال 24 ساعة",
+        "upsell_product_1": "",
+        "upsell_label_1": "",
+        "upsell_product_2": "",
+        "upsell_label_2": "",
+        "upsell_product_3": "",
+        "upsell_label_3": "",
+        "upsell_product_4": "",
+        "upsell_label_4": "",
         "acc_1_title": "المزايا",
         "acc_1_body": "<p>تجليد متين بخياطة يدوية، خط عثماني واضح، تذهيب يدوي للزخارف، وشريطان حريريان للعلامة.</p>",
         "acc_2_title": "المكونات والرواية",
@@ -156,6 +165,8 @@
         "a4": "نعم، يمكنك الإرجاع خلال 7 أيام من الاستلام شرط أن يكون في حالته الأصلية.",
         "q5": "كيف أتواصل معكم؟",
         "a5": "يمكنك التواصل معنا عبر واتساب أو الاتصال على الرقم المخصص لخدمة العملاء.",
+        "q6": "",
+        "a6": "",
         "color_scheme": "scheme-1",
         "padding_top": 80,
         "padding_bottom": 80
