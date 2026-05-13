@@ -1,0 +1,121 @@
+.quraan-vs {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  padding-block: var(--quraan-vs-padding-top, 80px) var(--quraan-vs-padding-bottom, 80px);
+}
+
+.quraan-vs__inner {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.quraan-vs__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.quraan-vs__heading {
+  font-family: var(--font-heading--family, inherit);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  color: var(--color-foreground-heading);
+  margin: 0;
+}
+
+.quraan-vs__columns {
+  display: grid;
+  grid-template-columns: 1fr 2px 1fr;
+  gap: 32px;
+  background: rgb(var(--color-foreground-rgb) / 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 32px;
+}
+
+.quraan-vs__col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quraan-vs__col-image {
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-inline: auto;
+}
+
+.quraan-vs__col-title {
+  font-family: var(--font-heading--family, inherit);
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0;
+  color: var(--color-foreground-heading);
+}
+
+.quraan-vs__col--theirs .quraan-vs__col-title {
+  opacity: 0.7;
+}
+
+.quraan-vs__divider {
+  background: var(--color-border);
+}
+
+.quraan-vs__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quraan-vs__point {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.quraan-vs__icon {
+  flex: 0 0 24px;
+  height: 24px;
+  width: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.quraan-vs__point--positive .quraan-vs__icon {
+  background: rgb(43 92 52 / 0.15);
+  color: #2B5C34;
+}
+
+.quraan-vs__point--negative .quraan-vs__icon {
+  background: rgb(139 28 28 / 0.12);
+  color: #8B1C1C;
+}
+
+.quraan-vs__point--negative {
+  opacity: 0.85;
+}
+
+@media (max-width: 749px) {
+  .quraan-vs__columns {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 24px;
+  }
+  .quraan-vs__divider {
+    height: 1px;
+    width: 100%;
+  }
+  .quraan-vs__col-image {
+    max-width: 180px;
+  }
+}

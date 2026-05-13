@@ -1,434 +1,177 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */{
+{
   "sections": {
-    "main": {
-      "type": "product-information",
-      "blocks": {
-        "media-gallery": {
-          "type": "_product-media-gallery",
-          "static": true,
-          "settings": {
-            "media_presentation": "grid",
-            "media_columns": "two",
-            "image_gap": 4,
-            "large_first_image": false,
-            "icons_style": "none",
-            "slideshow_controls_style": "counter",
-            "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "right",
-            "thumbnail_width": 44,
-            "aspect_ratio": "adapt",
-            "constrain_to_viewport": true,
-            "media_fit": "contain",
-            "media_radius": 0,
-            "extend_media": false,
-            "zoom": true,
-            "video_loop": false,
-            "hide_variants": true,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "product-details": {
-          "type": "_product-details",
-          "static": true,
-          "settings": {
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "details_position": "flex-start",
-            "gap": 28,
-            "sticky_details_desktop": true,
-            "inherit_color_scheme": true,
-            "color_scheme": "scheme-1",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 24,
-            "padding-block-end": 24,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "group_icgrde": {
-              "type": "group",
-              "name": "Header",
-              "settings": {
-                "open_in_new_tab": false,
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "text_xrnftG": {
-                  "type": "text",
-                  "name": "Product title",
-                  "settings": {
-                    "text": "<h1>{{ closest.product.title }}</h1>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-primary--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "price_tVjtKg": {
-                  "type": "price",
-                  "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": false,
-                    "show_tax_info": false,
-                    "type_preset": "paragraph",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "color": "var(--color-foreground)",
-                    "padding-block-start": 4,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_xrnftG",
-                "price_tVjtKg"
-              ]
-            },
-            "divider_VJhene": {
-              "type": "_divider",
-              "name": "t:names.divider",
-              "settings": {
-                "thickness": 1,
-                "corner_radius": "square",
-                "width_percent": 100,
-                "padding-block-start": 0,
-                "padding-block-end": 0
-              },
-              "blocks": {}
-            },
-            "variant_picker_R3rGDr": {
-              "type": "variant-picker",
-              "settings": {
-                "variant_style": "buttons",
-                "show_swatches": false,
-                "alignment": "left",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "buy_buttons_eYQEYi": {
-              "type": "buy-buttons",
-              "settings": {
-                "stacking": true,
-                "show_pickup_availability": false,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "quantity": {
-                  "type": "quantity",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                },
-                "add-to-cart": {
-                  "type": "add-to-cart",
-                  "static": true,
-                  "settings": {
-                    "style_class": "button"
-                  },
-                  "blocks": {}
-                },
-                "accelerated-checkout": {
-                  "type": "accelerated-checkout",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                }
-              },
-              "block_order": []
-            },
-            "quraan_cod_block": {
-              "type": "quraan-cod-trust",
-              "settings": {
-                "title": "الدفع عند الاستلام",
-                "detail": "ادفع نقداً عند وصول الطلب — بدون رسوم مسبقة.",
-                "phone_hint": "سيتم التواصل معك على رقمك (+218) لتأكيد الطلب."
-              },
-              "blocks": {}
-            },
-            "quraan_shipping_block": {
-              "type": "quraan-shipping-info",
-              "settings": {
-                "title": "معلومات الشحن",
-                "line_1": "شحن إلى جميع المدن الليبية.",
-                "line_2": "مدة التوصيل: 2 - 5 أيام عمل.",
-                "line_3": "تغليف آمن يحفظ المصحف من الانثناء والرطوبة."
-              },
-              "blocks": {}
-            },
-            "text_aEtTtq": {
-              "type": "text",
-              "name": "Product description",
-              "settings": {
-                "text": "{{ closest.product.description }}",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "group_icgrde",
-            "divider_VJhene",
-            "variant_picker_R3rGDr",
-            "buy_buttons_eYQEYi",
-            "quraan_cod_block",
-            "quraan_shipping_block",
-            "text_aEtTtq"
-          ]
-        }
-      },
+    "quraan_buybox": {
+      "type": "quraan-product-buybox",
       "settings": {
-        "content_width": "content-center-aligned",
-        "desktop_media_position": "left",
-        "equal_columns": false,
-        "limit_details_width": false,
-        "gap": 48,
-        "color_scheme": "",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "fallback_title": "المصحف الشريف",
+        "show_rating": true,
+        "rating_value": "4.9",
+        "review_count": "1349",
+        "review_label": "تقييم",
+        "subtitle": "<p>مصحف يَجمع بين روحانية المخطوطات الأندلسية ودقّة الطباعة الحديثة، ليكون رفيق تلاوتك اليومية.</p>",
+        "trust_1": "خط واضح ومريح",
+        "trust_2": "تجليد فاخر متين",
+        "trust_3": "إرجاع خلال 7 أيام",
+        "trust_4": "شحن لكل ليبيا",
+        "bundles_heading": "اختر باقتك ووفّر",
+        "bundle_1_label": "نسخة واحدة",
+        "bundle_1_badge": "",
+        "bundle_1_quantity": 1,
+        "bundle_2_label": "نسختان",
+        "bundle_2_badge": "+ شحن مجاني",
+        "bundle_2_quantity": 1,
+        "bundle_3_label": "ثلاث نسخ",
+        "bundle_3_badge": "الأكثر توفيراً",
+        "bundle_3_quantity": 1,
+        "summary_subtotal_label": "المجموع الفرعي",
+        "summary_discount_label": "الخصم",
+        "summary_shipping_label": "الشحن",
+        "summary_shipping_value": "مجاني",
+        "summary_total_label": "الإجمالي",
+        "form_heading": "أدخل بياناتك لإتمام الطلب",
+        "label_name": "الاسم الكامل",
+        "label_phone": "رقم الهاتف",
+        "label_city": "المدينة",
+        "label_city_placeholder": "اختر المدينة",
+        "label_area": "المنطقة / الحي",
+        "label_address": "العنوان التفصيلي",
+        "submit_label": "اطلب الآن",
+        "purchases_pill": "أكثر من 639 طلباً خلال 24 ساعة",
+        "acc_1_title": "المزايا",
+        "acc_1_body": "<p>تجليد متين بخياطة يدوية، خط عثماني واضح، تذهيب يدوي للزخارف، وشريطان حريريان للعلامة.</p>",
+        "acc_2_title": "المكونات والرواية",
+        "acc_2_body": "<p>طباعة المدينة المنورة برواية حفص عن عاصم، ورق كريمي خاص بالمصاحف.</p>",
+        "acc_3_title": "طريقة العناية",
+        "acc_3_body": "<p>احفظ المصحف في مكان جاف، وتجنّب التعرض المباشر للشمس للحفاظ على لون الغلاف.</p>",
+        "color_scheme": "scheme-1",
+        "enable_sticky_cta": true,
+        "padding_top": 48,
+        "padding_bottom": 64
       }
     },
-    "product_recommendations_qggXJq": {
-      "type": "product-recommendations",
-      "blocks": {
-        "text_cbcgyb": {
-          "type": "text",
-          "name": "t:names.header",
-          "settings": {
-            "text": "<h3>You may also like </h3>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-primary--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 8,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 8,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_DNizbJ": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_M7MJkb": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_gLWgA6": {
-              "type": "price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_DNizbJ",
-            "product_title_M7MJkb",
-            "price_gLWgA6"
-          ]
-        }
-      },
-      "block_order": [
-        "text_cbcgyb"
-      ],
-      "name": "t:names.product_recommendations",
+    "quraan_howto": {
+      "type": "quraan-how-to-use",
       "settings": {
-        "product": "{{ closest.product }}",
-        "recommendation_type": "related",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 4,
-        "columns": 4,
-        "mobile_columns": "2",
-        "columns_gap": 12,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "gap": 28,
+        "heading": "كيف تبدأ تلاوتك؟",
+        "subheading": "ثلاث خطوات تجعل لقاءك بكتاب الله أعمق",
+        "step_1_title": "تطهَّر",
+        "step_1_body": "ابدأ بالوضوء واستعد بقلبٍ خاشع لاستقبال آيات الله.",
+        "step_2_title": "اجلس بسكينة",
+        "step_2_body": "اختر مكاناً هادئاً، وافتح المصحف بأدبٍ وتعظيم.",
+        "step_3_title": "اتلُ بتدبُّر",
+        "step_3_body": "اقرأ على مهل، وتأمّل المعاني، واعقد العزم على العمل بما قرأت.",
+        "color_scheme": "scheme-3",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "quraan_features": {
+      "type": "quraan-feature-grid",
+      "settings": {
+        "kicker": "المزايا",
+        "heading": "لماذا هذا المصحف؟",
+        "subheading": "تفاصيل دقيقة تجعل تجربة التلاوة أعمق",
+        "f1_title": "خط واضح",
+        "f1_text": "خط عثماني بحجم مريح للقراءة الطويلة.",
+        "f2_title": "ورق فاخر",
+        "f2_text": "ورق كريمي مقاوم للشفافية وللتآكل.",
+        "f3_title": "تجليد متين",
+        "f3_text": "غلاف صلب مع خياطة يدوية لتدوم سنوات.",
+        "f4_title": "تذهيب يدوي",
+        "f4_text": "زخارف ذهبية على الغلاف وحواف الصفحات.",
+        "f5_title": "علامات مرجعية",
+        "f5_text": "شريطان حريريان لتتبع التلاوة بسهولة.",
+        "f6_title": "هدية مثالية",
+        "f6_text": "صندوق فاخر يجعله هدية تليق بالمناسبات.",
         "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "quraan_vs": {
+      "type": "quraan-vs-comparison",
+      "settings": {
+        "heading": "ما الفرق بيننا وبين غيرنا؟",
+        "ours_title": "مصحفنا",
+        "ours_point_1": "تجليد متين بخياطة يدوية",
+        "ours_point_2": "ورق كريمي مقاوم للشفافية",
+        "ours_point_3": "تذهيب يدوي للزخارف",
+        "ours_point_4": "خط عثماني واضح ومريح",
+        "ours_point_5": "شريطان حريريان للعلامة",
+        "ours_point_6": "صندوق هدية فاخر",
+        "theirs_title": "المصاحف الأخرى",
+        "theirs_point_1": "تجليد ضعيف يتلف بسرعة",
+        "theirs_point_2": "ورق رقيق وشفّاف",
+        "theirs_point_3": "طباعة باهتة دون تفاصيل",
+        "theirs_point_4": "خط صغير يُجهد القارئ",
+        "theirs_point_5": "بدون علامات مرجعية",
+        "theirs_point_6": "تغليف عادي",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "quraan_quotes": {
+      "type": "quraan-quotes",
+      "settings": {
+        "heading": "أكثر من 6000 قارئ سعيد",
+        "subheading": "ثقة عملائنا هي أعظم وسامٍ نعتزّ به.",
+        "stat_1_value": "98%",
+        "stat_1_label": "رضا عن جودة الطباعة منذ أول تصفّح",
+        "stat_2_value": "95%",
+        "stat_2_label": "يثنون على متانة التجليد والورق",
+        "stat_3_value": "92%",
+        "stat_3_label": "يوصون به كهدية في المناسبات",
+        "q_1_text": "وصلني المصحف بتغليفٍ راقٍ، والورق فاخر، وفعلاً يستحق الاسم. جزاكم الله خيراً.",
+        "q_1_name": "أحمد - طرابلس",
+        "q_2_text": "أهديت نسخة لوالدتي، وكانت سعيدة جداً بجمال التذهيب على الغلاف.",
+        "q_2_name": "فاطمة - بنغازي",
+        "q_3_text": "تعاملت معهم بثقة لأن الدفع عند الاستلام، والشحن أسرع مما توقعت.",
+        "q_3_name": "محمد - مصراتة",
+        "color_scheme": "scheme-3",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "quraan_faq": {
+      "type": "quraan-faq",
+      "settings": {
+        "heading": "الأسئلة الشائعة",
+        "q1": "هل الدفع عند الاستلام متاح؟",
+        "a1": "نعم، الدفع عند الاستلام متاح في جميع المدن الليبية بدون أي رسوم إضافية.",
+        "q2": "كم تستغرق مدة التوصيل؟",
+        "a2": "عادة بين 2 و 5 أيام عمل حسب المدينة، ونحرص على تأمين المصحف داخل تغليف ملائم.",
+        "q3": "ما رواية المصحف؟",
+        "a3": "المصحف بطباعة المدينة المنورة، برواية حفص عن عاصم.",
+        "q4": "هل يمكنني إرجاع المصحف؟",
+        "a4": "نعم، يمكنك الإرجاع خلال 7 أيام من الاستلام شرط أن يكون في حالته الأصلية.",
+        "q5": "كيف أتواصل معكم؟",
+        "a5": "يمكنك التواصل معنا عبر واتساب أو الاتصال على الرقم المخصص لخدمة العملاء.",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "quraan_cta": {
+      "type": "quraan-cta-banner",
+      "settings": {
+        "title": "ابدأ يومك بآيةٍ من نور",
+        "subtitle": "اطلب مصحفك اليوم، وادفع عند الاستلام.",
+        "cta_label": "اطلب الآن",
+        "cta_link": "#quraan-buybox-form",
+        "color_scheme": "scheme-2",
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     }
   },
   "order": [
-    "main",
-    "product_recommendations_qggXJq"
+    "quraan_buybox",
+    "quraan_howto",
+    "quraan_features",
+    "quraan_vs",
+    "quraan_quotes",
+    "quraan_faq",
+    "quraan_cta"
   ]
 }

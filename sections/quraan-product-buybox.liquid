@@ -1,0 +1,491 @@
+{{ 'quraan-rtl.css' | asset_url | stylesheet_tag }}
+{{ 'section-quraan-product-buybox.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'quraan-buybox.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign product = section.settings.product | default: closest.product
+  assign variants = product.variants
+  assign v1 = variants[0]
+  assign v2 = variants[1]
+  assign v3 = variants[2]
+  if variants.size == 1
+    assign v2 = nil
+    assign v3 = nil
+  endif
+  if variants.size == 2
+    assign v3 = nil
+  endif
+  assign default_variant = v1 | default: product.selected_or_first_available_variant
+
+  assign cities = 'طرابلس,بنغازي,مصراتة,سرت,سبها,البيضاء,طبرق,الزاوية,زليتن,صبراتة,الخمس,زوارة,درنة,اجدابيا,ترهونة,بني وليد,غريان,تاجوراء,جنزور,السراج,حي الاندلس,الهضبة طول,الترسانة,السبعة,بوستة,قصر بن غشير,سوق السبت,سوق الخميس امسيحل,اسبيعة,سبيعة,السايح,قصر خيار,القربوللي,العلوص,القويعة,قماطه,مسلاتة,غوط الرمان,وادي كعام,صرمان,الجميل,ابوكماش,رقدالين,راس جدير,العجيلات,زلطن,ابوعيسي,الماية,المطرد,جدائم,كوبري 27,الطويلة,ورشفانه,الناصرية,سيدي السايح,ضواحي طرابلس,الزنتان,الرجبان,الرياينة,كاباو,نالوت,طمزين,جادو,العوينية,الرحيبات,تيجي,يفرن,الجوش,بدر,القلعة,الجبل الغربي,وازن,غدامس,الاصابعة,الرابطة,مزدة,نسمة,راس لانوف,البريقة,بن جواد,السدرة,العقيلة,هراوة,ابوقرين,براك الشاطيء,الشويرف,اوباري,مرزق,غات,القطرون,ام الارانب,الغريفة,الشقيقة,تراغن,هون,ودان,سوكنة,زلة,الفقهاء,الجفرة,المرج,شحات,الابرق,سوسة,التميمي,توكرة,قصر ليبيا,مسة,المقرون,دريانة,القبة,الرجمة,البياضة,سلوق,قمينس,الابيار,امساعد,سيدي خليفة,جالو,اوجلة,الكفرة,تازربو,اجخرة,مكتب طرابلس,مكتب سبها' | split: ','
+-%}
+
+<section
+  class="quraan-buybox color-{{ section.settings.color_scheme }}"
+  data-product-id="{{ product.id }}"
+  data-default-variant-id="{{ default_variant.id }}"
+  style="--quraan-buybox-padding-top: {{ section.settings.padding_top }}px; --quraan-buybox-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="quraan-buybox__inner">
+
+    {%- comment -%} ===== Gallery ===== {%- endcomment -%}
+    <div class="quraan-buybox__gallery">
+      {%- if product.media.size > 0 -%}
+        <div class="quraan-buybox__main-image" id="quraan-main-image">
+          {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'eager', class: 'quraan-buybox__image', alt: product.title }}
+        </div>
+        {%- if product.media.size > 1 -%}
+          <ul class="quraan-buybox__thumbs" role="list">
+            {%- for media in product.media limit: 6 -%}
+              <li class="quraan-buybox__thumb-item">
+                <button
+                  type="button"
+                  class="quraan-buybox__thumb {% if forloop.first %}is-active{% endif %}"
+                  data-image-src="{{ media.preview_image | image_url: width: 1200 }}"
+                  data-image-alt="{{ media.alt | default: product.title | escape }}"
+                  aria-label="{{ 'accessibility.show_product_details' | t: product_name: product.title }}"
+                >
+                  {{ media.preview_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: media.alt | default: product.title }}
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      {%- else -%}
+        <div class="quraan-buybox__main-image quraan-buybox__main-image--placeholder">
+          {{ 'product-apparel-1' | placeholder_svg_tag: 'quraan-buybox__image' }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ===== Content column ===== {%- endcomment -%}
+    <div class="quraan-buybox__content">
+
+      <h1 class="quraan-buybox__title">{{ product.title | default: section.settings.fallback_title }}</h1>
+
+      {%- if section.settings.show_rating -%}
+        <div class="quraan-buybox__rating" aria-label="{{ 'accessibility.rating' | t: rating: section.settings.rating_value }}">
+          <span class="quraan-buybox__stars" aria-hidden="true">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            {%- endfor -%}
+          </span>
+          <span class="quraan-buybox__rating-count">({{ section.settings.review_count }} {{ section.settings.review_label }})</span>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.subtitle != blank -%}
+        <div class="quraan-buybox__subtitle">{{ section.settings.subtitle }}</div>
+      {%- endif -%}
+
+      {%- comment -%} ===== Trust row ===== {%- endcomment -%}
+      <ul class="quraan-buybox__trust" role="list">
+        <li class="quraan-buybox__trust-item">
+          <span class="quraan-buybox__trust-icon" aria-hidden="true">📖</span>
+          <span>{{ section.settings.trust_1 }}</span>
+        </li>
+        <li class="quraan-buybox__trust-item">
+          <span class="quraan-buybox__trust-icon" aria-hidden="true">✨</span>
+          <span>{{ section.settings.trust_2 }}</span>
+        </li>
+        <li class="quraan-buybox__trust-item">
+          <span class="quraan-buybox__trust-icon" aria-hidden="true">🛡️</span>
+          <span>{{ section.settings.trust_3 }}</span>
+        </li>
+        <li class="quraan-buybox__trust-item">
+          <span class="quraan-buybox__trust-icon" aria-hidden="true">🚚</span>
+          <span>{{ section.settings.trust_4 }}</span>
+        </li>
+      </ul>
+
+      {%- comment -%} ===== Bundle picker ===== {%- endcomment -%}
+      <div class="quraan-buybox__bundles">
+        <h2 class="quraan-buybox__bundles-heading">{{ section.settings.bundles_heading }}</h2>
+
+        <fieldset class="quraan-buybox__bundle-list">
+          <legend class="visually-hidden">{{ section.settings.bundles_heading }}</legend>
+
+          {%- if v1 != blank -%}
+            <label class="quraan-buybox__bundle {% if v1.available == false %}is-unavailable{% endif %}">
+              <input
+                type="radio"
+                name="quraan_bundle"
+                value="{{ v1.id }}"
+                data-quantity="{{ section.settings.bundle_1_quantity | default: 1 }}"
+                data-price="{{ v1.price }}"
+                data-compare-at="{{ v1.compare_at_price }}"
+                {% if v1.available == false %}disabled{% endif %}
+                checked
+              >
+              <span class="quraan-buybox__bundle-card">
+                <span class="quraan-buybox__bundle-label">{{ section.settings.bundle_1_label }}</span>
+                {%- if section.settings.bundle_1_badge != blank -%}
+                  <span class="quraan-buybox__bundle-badge">{{ section.settings.bundle_1_badge }}</span>
+                {%- endif -%}
+                <span class="quraan-buybox__bundle-prices">
+                  {%- if v1.compare_at_price > v1.price -%}
+                    <s class="quraan-buybox__bundle-compare">{{ v1.compare_at_price | money }}</s>
+                  {%- endif -%}
+                  <strong class="quraan-buybox__bundle-price">{{ v1.price | money }}</strong>
+                </span>
+              </span>
+            </label>
+          {%- endif -%}
+
+          {%- if v2 != blank -%}
+            <label class="quraan-buybox__bundle {% if v2.available == false %}is-unavailable{% endif %}">
+              <input
+                type="radio"
+                name="quraan_bundle"
+                value="{{ v2.id }}"
+                data-quantity="{{ section.settings.bundle_2_quantity | default: 1 }}"
+                data-price="{{ v2.price }}"
+                data-compare-at="{{ v2.compare_at_price }}"
+                {% if v2.available == false %}disabled{% endif %}
+              >
+              <span class="quraan-buybox__bundle-card">
+                <span class="quraan-buybox__bundle-label">{{ section.settings.bundle_2_label }}</span>
+                {%- if section.settings.bundle_2_badge != blank -%}
+                  <span class="quraan-buybox__bundle-badge">{{ section.settings.bundle_2_badge }}</span>
+                {%- endif -%}
+                <span class="quraan-buybox__bundle-prices">
+                  {%- if v2.compare_at_price > v2.price -%}
+                    <s class="quraan-buybox__bundle-compare">{{ v2.compare_at_price | money }}</s>
+                  {%- endif -%}
+                  <strong class="quraan-buybox__bundle-price">{{ v2.price | money }}</strong>
+                </span>
+              </span>
+            </label>
+          {%- endif -%}
+
+          {%- if v3 != blank -%}
+            <label class="quraan-buybox__bundle quraan-buybox__bundle--featured {% if v3.available == false %}is-unavailable{% endif %}">
+              <input
+                type="radio"
+                name="quraan_bundle"
+                value="{{ v3.id }}"
+                data-quantity="{{ section.settings.bundle_3_quantity | default: 1 }}"
+                data-price="{{ v3.price }}"
+                data-compare-at="{{ v3.compare_at_price }}"
+                {% if v3.available == false %}disabled{% endif %}
+              >
+              <span class="quraan-buybox__bundle-card">
+                <span class="quraan-buybox__bundle-label">{{ section.settings.bundle_3_label }}</span>
+                {%- if section.settings.bundle_3_badge != blank -%}
+                  <span class="quraan-buybox__bundle-badge">{{ section.settings.bundle_3_badge }}</span>
+                {%- endif -%}
+                <span class="quraan-buybox__bundle-prices">
+                  {%- if v3.compare_at_price > v3.price -%}
+                    <s class="quraan-buybox__bundle-compare">{{ v3.compare_at_price | money }}</s>
+                  {%- endif -%}
+                  <strong class="quraan-buybox__bundle-price">{{ v3.price | money }}</strong>
+                </span>
+              </span>
+            </label>
+          {%- endif -%}
+        </fieldset>
+
+        {%- comment -%} ===== Live summary ===== {%- endcomment -%}
+        <dl class="quraan-buybox__summary">
+          <div class="quraan-buybox__summary-row">
+            <dt>{{ section.settings.summary_subtotal_label }}</dt>
+            <dd data-buybox-subtotal>{{ default_variant.compare_at_price | default: default_variant.price | money }}</dd>
+          </div>
+          <div class="quraan-buybox__summary-row" data-buybox-discount-row {% if default_variant.compare_at_price <= default_variant.price %}hidden{% endif %}>
+            <dt>{{ section.settings.summary_discount_label }}</dt>
+            <dd data-buybox-discount class="quraan-buybox__summary-discount">
+              {%- assign discount = default_variant.compare_at_price | minus: default_variant.price -%}
+              -{{ discount | money }}
+            </dd>
+          </div>
+          <div class="quraan-buybox__summary-row">
+            <dt>{{ section.settings.summary_shipping_label }}</dt>
+            <dd data-buybox-shipping>{{ section.settings.summary_shipping_value }}</dd>
+          </div>
+          <div class="quraan-buybox__summary-row quraan-buybox__summary-row--total">
+            <dt>{{ section.settings.summary_total_label }}</dt>
+            <dd data-buybox-total>{{ default_variant.price | money }}</dd>
+          </div>
+        </dl>
+      </div>
+
+      {%- comment -%} ===== Order form ===== {%- endcomment -%}
+      <form
+        class="quraan-buybox__form"
+        id="quraan-buybox-form"
+        novalidate
+      >
+        <p class="quraan-buybox__form-heading">📝 {{ section.settings.form_heading }}</p>
+
+        <div class="quraan-buybox__field">
+          <label for="quraan-name">{{ section.settings.label_name }}<span aria-hidden="true">*</span></label>
+          <input id="quraan-name" name="name" type="text" required autocomplete="name" placeholder="{{ section.settings.label_name }}">
+        </div>
+
+        <div class="quraan-buybox__field">
+          <label for="quraan-phone">{{ section.settings.label_phone }}<span aria-hidden="true">*</span></label>
+          <input id="quraan-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="091XXXXXXX">
+        </div>
+
+        <div class="quraan-buybox__field">
+          <label for="quraan-city">{{ section.settings.label_city }}<span aria-hidden="true">*</span></label>
+          <select id="quraan-city" name="city" required>
+            <option value="" disabled selected>{{ section.settings.label_city_placeholder }}</option>
+            {%- for city in cities -%}
+              <option value="{{ city }}">{{ city }}</option>
+            {%- endfor -%}
+          </select>
+        </div>
+
+        <div class="quraan-buybox__field">
+          <label for="quraan-area">{{ section.settings.label_area }}</label>
+          <input id="quraan-area" name="area" type="text" autocomplete="address-level3" placeholder="{{ section.settings.label_area }}">
+        </div>
+
+        <div class="quraan-buybox__field">
+          <label for="quraan-address">{{ section.settings.label_address }}<span aria-hidden="true">*</span></label>
+          <input id="quraan-address" name="address" type="text" required autocomplete="street-address" placeholder="{{ section.settings.label_address }}">
+        </div>
+
+        {%- comment -%} ===== Upsells ===== {%- endcomment -%}
+        {%- assign upsell_count = 0 -%}
+        {%- for i in (1..4) -%}
+          {%- assign key = 'upsell_product_' | append: i -%}
+          {%- if section.settings[key] != blank -%}
+            {%- assign upsell_count = upsell_count | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if upsell_count > 0 -%}
+          <div class="quraan-buybox__upsells">
+            {%- for i in (1..4) -%}
+              {%- assign key = 'upsell_product_' | append: i -%}
+              {%- assign discount_key = 'upsell_discount_' | append: i -%}
+              {%- assign label_key = 'upsell_label_' | append: i -%}
+              {%- assign up_product = section.settings[key] -%}
+              {%- assign up_discount = section.settings[discount_key] -%}
+              {%- assign up_label = section.settings[label_key] -%}
+
+              {%- if up_product != blank -%}
+                {%- assign up_variant = up_product.selected_or_first_available_variant -%}
+                <label class="quraan-buybox__upsell">
+                  <input
+                    type="checkbox"
+                    class="quraan-buybox__upsell-check"
+                    data-variant-id="{{ up_variant.id }}"
+                  >
+                  {%- if up_product.featured_image != blank -%}
+                    {{ up_product.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', class: 'quraan-buybox__upsell-image', alt: up_product.title }}
+                  {%- endif -%}
+                  <span class="quraan-buybox__upsell-body">
+                    <span class="quraan-buybox__upsell-title">
+                      🔥 {{ up_label | default: up_product.title }}
+                      {%- if up_discount != blank and up_discount > 0 -%}
+                        <span class="quraan-buybox__upsell-discount">{{ up_discount }}% خصم</span>
+                      {%- endif -%}
+                    </span>
+                    <span class="quraan-buybox__upsell-prices">
+                      <strong>{{ up_variant.price | money }}</strong>
+                      {%- if up_variant.compare_at_price > up_variant.price -%}
+                        <s>{{ up_variant.compare_at_price | money }}</s>
+                      {%- endif -%}
+                    </span>
+                  </span>
+                </label>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <button type="submit" class="quraan-buybox__submit">
+          🛒 {{ section.settings.submit_label }}
+        </button>
+
+        <p class="quraan-buybox__form-error" data-buybox-error hidden></p>
+
+        {%- if section.settings.purchases_pill != blank -%}
+          <p class="quraan-buybox__purchases-pill">✅ {{ section.settings.purchases_pill }}</p>
+        {%- endif -%}
+      </form>
+
+      {%- comment -%} ===== Info accordions ===== {%- endcomment -%}
+      <div class="quraan-buybox__accordions">
+        {%- if section.settings.acc_1_body != blank -%}
+          <details class="quraan-buybox__accordion">
+            <summary>
+              <span aria-hidden="true">❓</span>
+              {{ section.settings.acc_1_title }}
+              <span class="quraan-buybox__accordion-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="quraan-buybox__accordion-body">{{ section.settings.acc_1_body }}</div>
+          </details>
+        {%- endif -%}
+
+        {%- if section.settings.acc_2_body != blank -%}
+          <details class="quraan-buybox__accordion">
+            <summary>
+              <span aria-hidden="true">⭐</span>
+              {{ section.settings.acc_2_title }}
+              <span class="quraan-buybox__accordion-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="quraan-buybox__accordion-body">{{ section.settings.acc_2_body }}</div>
+          </details>
+        {%- endif -%}
+
+        {%- if section.settings.acc_3_body != blank -%}
+          <details class="quraan-buybox__accordion">
+            <summary>
+              <span aria-hidden="true">📋</span>
+              {{ section.settings.acc_3_title }}
+              <span class="quraan-buybox__accordion-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="quraan-buybox__accordion-body">{{ section.settings.acc_3_body }}</div>
+          </details>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+
+  {%- if section.settings.enable_sticky_cta -%}
+    <a class="quraan-buybox__sticky-cta" href="#quraan-buybox-form">
+      🛒 {{ section.settings.submit_label }}
+    </a>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Quraan · المنتج",
+  "tag": "section",
+  "class": "quraan-buybox-wrapper",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    { "type": "header", "content": "المنتج" },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "المنتج (اختياري)",
+      "info": "اتركه فارغاً لاستخدام المنتج الحالي تلقائياً."
+    },
+    {
+      "type": "text",
+      "id": "fallback_title",
+      "label": "عنوان احتياطي",
+      "default": "المصحف الشريف",
+      "info": "يظهر فقط في حال لم يتم تحديد منتج."
+    },
+
+    { "type": "header", "content": "التقييم" },
+    { "type": "checkbox", "id": "show_rating", "label": "إظهار النجوم", "default": true },
+    { "type": "text", "id": "rating_value", "label": "قيمة التقييم", "default": "4.9" },
+    { "type": "text", "id": "review_count", "label": "عدد التقييمات", "default": "1349" },
+    { "type": "text", "id": "review_label", "label": "كلمة \"تقييم\"", "default": "تقييم" },
+
+    { "type": "header", "content": "الوصف" },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "وصف قصير",
+      "default": "<p>مصحف يَجمع بين روحانية المخطوطات الأندلسية ودقّة الطباعة الحديثة، ليكون رفيق تلاوتك اليومية.</p>"
+    },
+
+    { "type": "header", "content": "شريط الثقة" },
+    { "type": "text", "id": "trust_1", "label": "البند 1", "default": "خط واضح ومريح" },
+    { "type": "text", "id": "trust_2", "label": "البند 2", "default": "تجليد فاخر متين" },
+    { "type": "text", "id": "trust_3", "label": "البند 3", "default": "إرجاع خلال 7 أيام" },
+    { "type": "text", "id": "trust_4", "label": "البند 4", "default": "شحن لكل ليبيا" },
+
+    { "type": "header", "content": "اختيار الباقة" },
+    {
+      "type": "text",
+      "id": "bundles_heading",
+      "label": "عنوان القسم",
+      "default": "اختر باقتك ووفّر"
+    },
+    {
+      "type": "paragraph",
+      "content": "البطاقات الثلاث ترتبط تلقائياً بأول 3 نسخ (variants) من المنتج المحدد. أنشئ في الإدارة نسخة لكل كمية (1 نسخة، نسختان، 3 نسخ) بأسعارها المختلفة."
+    },
+    { "type": "text", "id": "bundle_1_label", "label": "اسم الباقة 1", "default": "نسخة واحدة" },
+    { "type": "text", "id": "bundle_1_badge", "label": "وسم الباقة 1" },
+    { "type": "number", "id": "bundle_1_quantity", "label": "الكمية المباعة", "default": 1, "info": "العدد الفعلي الذي يضاف للسلة عند اختيار هذه الباقة." },
+    { "type": "text", "id": "bundle_2_label", "label": "اسم الباقة 2", "default": "نسختان" },
+    { "type": "text", "id": "bundle_2_badge", "label": "وسم الباقة 2", "default": "+ شحن مجاني" },
+    { "type": "number", "id": "bundle_2_quantity", "label": "الكمية المباعة", "default": 1 },
+    { "type": "text", "id": "bundle_3_label", "label": "اسم الباقة 3", "default": "ثلاث نسخ" },
+    { "type": "text", "id": "bundle_3_badge", "label": "وسم الباقة 3", "default": "الأكثر توفيراً" },
+    { "type": "number", "id": "bundle_3_quantity", "label": "الكمية المباعة", "default": 1 },
+
+    { "type": "header", "content": "ملخص الطلب" },
+    { "type": "text", "id": "summary_subtotal_label", "label": "المجموع الفرعي", "default": "المجموع الفرعي" },
+    { "type": "text", "id": "summary_discount_label", "label": "الخصم", "default": "الخصم" },
+    { "type": "text", "id": "summary_shipping_label", "label": "الشحن", "default": "الشحن" },
+    { "type": "text", "id": "summary_shipping_value", "label": "قيمة الشحن", "default": "مجاني" },
+    { "type": "text", "id": "summary_total_label", "label": "الإجمالي", "default": "الإجمالي" },
+
+    { "type": "header", "content": "نموذج الطلب" },
+    { "type": "text", "id": "form_heading", "label": "عنوان النموذج", "default": "أدخل بياناتك لإتمام الطلب" },
+    { "type": "text", "id": "label_name", "label": "تسمية الاسم", "default": "الاسم الكامل" },
+    { "type": "text", "id": "label_phone", "label": "تسمية الهاتف", "default": "رقم الهاتف" },
+    { "type": "text", "id": "label_city", "label": "تسمية المدينة", "default": "المدينة" },
+    { "type": "text", "id": "label_city_placeholder", "label": "خيار المدينة الافتراضي", "default": "اختر المدينة" },
+    { "type": "text", "id": "label_area", "label": "تسمية المنطقة", "default": "المنطقة / الحي" },
+    { "type": "text", "id": "label_address", "label": "تسمية العنوان", "default": "العنوان التفصيلي" },
+    { "type": "text", "id": "submit_label", "label": "زر الإرسال", "default": "اطلب الآن" },
+    { "type": "text", "id": "purchases_pill", "label": "إشعار الطلبات", "default": "أكثر من 639 طلباً خلال 24 ساعة" },
+
+    { "type": "header", "content": "منتجات إضافية (Upsell)" },
+    { "type": "product", "id": "upsell_product_1", "label": "المنتج 1" },
+    { "type": "text", "id": "upsell_label_1", "label": "وصف بديل (اختياري)" },
+    { "type": "number", "id": "upsell_discount_1", "label": "نسبة الخصم 1 (%)" },
+    { "type": "product", "id": "upsell_product_2", "label": "المنتج 2" },
+    { "type": "text", "id": "upsell_label_2", "label": "وصف بديل" },
+    { "type": "number", "id": "upsell_discount_2", "label": "نسبة الخصم 2 (%)" },
+    { "type": "product", "id": "upsell_product_3", "label": "المنتج 3" },
+    { "type": "text", "id": "upsell_label_3", "label": "وصف بديل" },
+    { "type": "number", "id": "upsell_discount_3", "label": "نسبة الخصم 3 (%)" },
+    { "type": "product", "id": "upsell_product_4", "label": "المنتج 4" },
+    { "type": "text", "id": "upsell_label_4", "label": "وصف بديل" },
+    { "type": "number", "id": "upsell_discount_4", "label": "نسبة الخصم 4 (%)" },
+
+    { "type": "header", "content": "أقسام معلوماتية" },
+    { "type": "text", "id": "acc_1_title", "label": "عنوان 1", "default": "المزايا" },
+    { "type": "richtext", "id": "acc_1_body", "label": "محتوى 1", "default": "<p>تجليد متين، خط واضح، تذهيب يدوي، شريطان حريريان للعلامة.</p>" },
+    { "type": "text", "id": "acc_2_title", "label": "عنوان 2", "default": "المكونات والرواية" },
+    { "type": "richtext", "id": "acc_2_body", "label": "محتوى 2", "default": "<p>طباعة المدينة المنورة برواية حفص عن عاصم، ورق كريمي خاص بالمصاحف.</p>" },
+    { "type": "text", "id": "acc_3_title", "label": "عنوان 3", "default": "طريقة العناية" },
+    { "type": "richtext", "id": "acc_3_body", "label": "محتوى 3", "default": "<p>احفظ المصحف في مكان جاف، وتجنّب التعرض المباشر للشمس للحفاظ على لون الغلاف.</p>" },
+
+    { "type": "header", "content": "العرض" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "نظام الألوان",
+      "default": "scheme-1"
+    },
+    { "type": "checkbox", "id": "enable_sticky_cta", "label": "شريط طلب ثابت في الجوال", "default": true },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "هامش علوي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "هامش سفلي",
+      "min": 0, "max": 200, "step": 4, "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quraan · المنتج"
+    }
+  ]
+}
+{% endschema %}

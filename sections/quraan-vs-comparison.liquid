@@ -1,0 +1,97 @@
+{{ 'section-quraan-vs-comparison.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="quraan-vs color-{{ section.settings.color_scheme }}"
+  style="--quraan-vs-padding-top: {{ section.settings.padding_top }}px; --quraan-vs-padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="quraan-vs__inner">
+    <header class="quraan-vs__header">
+      <h2 class="quraan-vs__heading">{{ section.settings.heading }}</h2>
+    </header>
+
+    <div class="quraan-vs__columns">
+      <div class="quraan-vs__col quraan-vs__col--ours">
+        {% if section.settings.ours_image != blank %}
+          {{ section.settings.ours_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: section.settings.ours_title, class: 'quraan-vs__col-image' }}
+        {% endif %}
+        <h3 class="quraan-vs__col-title">{{ section.settings.ours_title }}</h3>
+        <ul class="quraan-vs__list" role="list">
+          {% for i in (1..6) %}
+            {% assign key = 'ours_point_' | append: i %}
+            {% assign point = section.settings[key] %}
+            {% if point != blank %}
+              <li class="quraan-vs__point quraan-vs__point--positive">
+                <span class="quraan-vs__icon" aria-hidden="true">✓</span>
+                <span>{{ point }}</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="quraan-vs__divider" aria-hidden="true"></div>
+
+      <div class="quraan-vs__col quraan-vs__col--theirs">
+        {% if section.settings.theirs_image != blank %}
+          {{ section.settings.theirs_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: section.settings.theirs_title, class: 'quraan-vs__col-image' }}
+        {% endif %}
+        <h3 class="quraan-vs__col-title">{{ section.settings.theirs_title }}</h3>
+        <ul class="quraan-vs__list" role="list">
+          {% for i in (1..6) %}
+            {% assign key = 'theirs_point_' | append: i %}
+            {% assign point = section.settings[key] %}
+            {% if point != blank %}
+              <li class="quraan-vs__point quraan-vs__point--negative">
+                <span class="quraan-vs__icon" aria-hidden="true">✕</span>
+                <span>{{ point }}</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quraan · المقارنة",
+  "tag": "section",
+  "class": "quraan-vs-wrapper",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "العنوان", "default": "ما الفرق بيننا وبين غيرنا؟" },
+
+    { "type": "header", "content": "العمود الأول (نحن)" },
+    { "type": "text", "id": "ours_title", "label": "العنوان", "default": "مصحفنا" },
+    { "type": "image_picker", "id": "ours_image", "label": "الصورة" },
+    { "type": "text", "id": "ours_point_1", "label": "نقطة 1", "default": "تجليد متين بخياطة يدوية" },
+    { "type": "text", "id": "ours_point_2", "label": "نقطة 2", "default": "ورق كريمي مقاوم للشفافية" },
+    { "type": "text", "id": "ours_point_3", "label": "نقطة 3", "default": "تذهيب يدوي للزخارف" },
+    { "type": "text", "id": "ours_point_4", "label": "نقطة 4", "default": "خط عثماني واضح ومريح" },
+    { "type": "text", "id": "ours_point_5", "label": "نقطة 5", "default": "شريطان حريريان للعلامة" },
+    { "type": "text", "id": "ours_point_6", "label": "نقطة 6", "default": "صندوق هدية فاخر" },
+
+    { "type": "header", "content": "العمود الثاني (المنافسون)" },
+    { "type": "text", "id": "theirs_title", "label": "العنوان", "default": "المصاحف الأخرى" },
+    { "type": "image_picker", "id": "theirs_image", "label": "الصورة" },
+    { "type": "text", "id": "theirs_point_1", "label": "نقطة 1", "default": "تجليد ضعيف يتلف بسرعة" },
+    { "type": "text", "id": "theirs_point_2", "label": "نقطة 2", "default": "ورق رقيق وشفّاف" },
+    { "type": "text", "id": "theirs_point_3", "label": "نقطة 3", "default": "طباعة باهتة دون تفاصيل" },
+    { "type": "text", "id": "theirs_point_4", "label": "نقطة 4", "default": "خط صغير يُجهد القارئ" },
+    { "type": "text", "id": "theirs_point_5", "label": "نقطة 5", "default": "بدون علامات مرجعية" },
+    { "type": "text", "id": "theirs_point_6", "label": "نقطة 6", "default": "تغليف عادي" },
+
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "نظام الألوان",
+      "default": "scheme-1"
+    },
+    { "type": "range", "id": "padding_top", "label": "هامش علوي", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "هامش سفلي", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [
+    { "name": "Quraan · المقارنة" }
+  ]
+}
+{% endschema %}

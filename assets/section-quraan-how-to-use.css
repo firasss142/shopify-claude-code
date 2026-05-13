@@ -1,0 +1,97 @@
+.quraan-howto {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  padding-block: var(--quraan-howto-padding-top, 80px) var(--quraan-howto-padding-bottom, 80px);
+}
+
+.quraan-howto__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.quraan-howto__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.quraan-howto__heading {
+  font-family: var(--font-heading--family, inherit);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  color: var(--color-foreground-heading);
+  margin: 0 0 12px;
+}
+
+.quraan-howto__subheading {
+  font-size: 1rem;
+  color: var(--color-foreground);
+  opacity: 0.85;
+  margin: 0;
+}
+
+.quraan-howto__steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: step;
+}
+
+.quraan-howto__step {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.quraan-howto__step-media {
+  aspect-ratio: 4 / 3;
+  background: rgb(var(--color-foreground-rgb) / 0.04);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.quraan-howto__step-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quraan-howto__step-number {
+  font-family: var(--font-heading--family, inherit);
+  font-size: 4rem;
+  color: var(--color-primary);
+  opacity: 0.85;
+}
+
+.quraan-howto__step-content {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quraan-howto__step-title {
+  font-family: var(--font-heading--family, inherit);
+  font-size: 1.25rem;
+  color: var(--color-foreground-heading);
+  margin: 0;
+}
+
+.quraan-howto__step-body {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-foreground);
+  margin: 0;
+}
+
+@media (max-width: 749px) {
+  .quraan-howto__steps {
+    grid-template-columns: 1fr;
+  }
+}
