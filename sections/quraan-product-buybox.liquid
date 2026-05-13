@@ -5,19 +5,26 @@
 {%- liquid
   assign product = section.settings.product | default: closest.product
   assign default_variant = product.selected_or_first_available_variant
-  assign unit_price = default_variant.price | default: 0
+  assign unit_price = default_variant.price
   assign unit_compare = default_variant.compare_at_price | default: unit_price
 
-  # Each bundle tier = same variant × N quantity. Pricing is unit_price × quantity
-  # (real total at checkout). Tier discounts should be set via Shopify automatic
-  # discounts ("Buy 2 save X") to keep the displayed total honest.
+  # Each bundle tier: quantity × per-tier price override (in cents). If override is blank/0, fall back to unit_price × qty.
   assign b1_qty = section.settings.bundle_1_quantity | default: 1
   assign b2_qty = section.settings.bundle_2_quantity | default: 2
   assign b3_qty = section.settings.bundle_3_quantity | default: 3
 
-  assign b1_price = unit_price | times: b1_qty
-  assign b2_price = unit_price | times: b2_qty
-  assign b3_price = unit_price | times: b3_qty
+  assign b1_price = section.settings.bundle_1_price | times: 100
+  if b1_price == 0
+    assign b1_price = unit_price | times: b1_qty
+  endif
+  assign b2_price = section.settings.bundle_2_price | times: 100
+  if b2_price == 0
+    assign b2_price = unit_price | times: b2_qty
+  endif
+  assign b3_price = section.settings.bundle_3_price | times: 100
+  if b3_price == 0
+    assign b3_price = unit_price | times: b3_qty
+  endif
 
   assign b1_compare = unit_compare | times: b1_qty
   assign b2_compare = unit_compare | times: b2_qty
@@ -407,17 +414,20 @@
     },
     {
       "type": "paragraph",
-      "content": "كل باقة تضيف نفس المنتج بكمية محددة. لإنشاء عروض مثل \"اشترِ 2 ووفّر 10%\" استخدم خصم تلقائي من إعدادات Shopify (التخفيضات)، وسيُطبَّق عند إتمام الطلب."
+      "content": "كل باقة تضيف نفس المنتج بعدد محدد. حدد سعر الباقة (مثلاً سعر النسختين معاً بعد الخصم). اتركه فارغاً ليُحسب تلقائياً = سعر الوحدة × الكمية."
     },
     { "type": "text", "id": "bundle_1_label", "label": "اسم الباقة 1", "default": "نسخة واحدة" },
     { "type": "text", "id": "bundle_1_badge", "label": "وسم الباقة 1" },
     { "type": "number", "id": "bundle_1_quantity", "label": "الكمية", "default": 1 },
+    { "type": "number", "id": "bundle_1_price", "label": "سعر الباقة 1 (اختياري)", "info": "بالعملة الأساسية، مثل 80 — اتركه فارغاً للحساب التلقائي." },
     { "type": "text", "id": "bundle_2_label", "label": "اسم الباقة 2", "default": "نسختان" },
     { "type": "text", "id": "bundle_2_badge", "label": "وسم الباقة 2", "default": "+ شحن مجاني" },
     { "type": "number", "id": "bundle_2_quantity", "label": "الكمية", "default": 2 },
+    { "type": "number", "id": "bundle_2_price", "label": "سعر الباقة 2 (اختياري)" },
     { "type": "text", "id": "bundle_3_label", "label": "اسم الباقة 3", "default": "ثلاث نسخ" },
     { "type": "text", "id": "bundle_3_badge", "label": "وسم الباقة 3", "default": "الأكثر توفيراً" },
     { "type": "number", "id": "bundle_3_quantity", "label": "الكمية", "default": 3 },
+    { "type": "number", "id": "bundle_3_price", "label": "سعر الباقة 3 (اختياري)" },
 
     { "type": "header", "content": "ملخص الطلب" },
     { "type": "text", "id": "summary_subtotal_label", "label": "المجموع الفرعي", "default": "المجموع الفرعي" },
