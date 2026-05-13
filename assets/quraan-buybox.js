@@ -131,8 +131,9 @@
         return;
       }
 
-      if (!currentVariantId) {
-        setError('الرجاء اختيار الباقة.');
+      if (!currentVariantId || currentVariantId === '' || currentVariantId === '0') {
+        setError('لم يتم ربط منتج بهذه الصفحة. يُرجى التواصل مع المتجر.');
+        console.error('[quraan-buybox] No variant id available. Section may be missing a product setting, or the section is on a non-product page.');
         return;
       }
 

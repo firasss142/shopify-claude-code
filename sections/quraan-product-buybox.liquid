@@ -5,8 +5,12 @@
 {%- liquid
   assign product = section.settings.product | default: closest.product
   assign default_variant = product.selected_or_first_available_variant
-  assign unit_price = default_variant.price
+  assign unit_price = default_variant.price | default: 0
   assign unit_compare = default_variant.compare_at_price | default: unit_price
+  assign has_product = false
+  if product != blank and default_variant != blank and default_variant.id != blank
+    assign has_product = true
+  endif
 
   # Each bundle tier: quantity × per-tier price override (in cents). If override is blank/0, fall back to unit_price × qty.
   assign b1_qty = section.settings.bundle_1_quantity | default: 1
@@ -37,8 +41,15 @@
   class="quraan-buybox color-{{ section.settings.color_scheme }}"
   data-product-id="{{ product.id }}"
   data-default-variant-id="{{ default_variant.id }}"
+  data-has-product="{{ has_product }}"
   style="--quraan-buybox-padding-top: {{ section.settings.padding_top }}px; --quraan-buybox-padding-bottom: {{ section.settings.padding_bottom }}px;"
 >
+  {%- if has_product == false and request.design_mode -%}
+    <div style="background:#8B1C1C;color:#F2E8D0;padding:16px;text-align:center;font-family:sans-serif;">
+      ⚠️ لم يتم تحديد منتج لهذا القسم. افتح إعدادات القسم واختر المنتج من قائمة <strong>"المنتج"</strong>.
+    </div>
+  {%- endif -%}
+
   <div class="quraan-buybox__inner">
 
     {%- comment -%} ===== Gallery ===== {%- endcomment -%}
