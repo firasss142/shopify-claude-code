@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "quraan_hero": {
@@ -69,6 +78,7 @@
     "quraan_spotlight": {
       "type": "quraan-product-spotlight",
       "settings": {
+        "product": "quran",
         "kicker": "المنتج",
         "heading": "اختر نسختك",
         "subtitle": "اختر اللون والمقاس الذي يناسبك، ودع البركة تصلك إلى باب بيتك.",
@@ -108,6 +118,8 @@
         "a4": "نعم، يمكنك الإرجاع خلال 7 أيام من الاستلام شرط أن يكون في حالته الأصلية.",
         "q5": "كيف أتواصل معكم؟",
         "a5": "يمكنك التواصل معنا عبر واتساب أو الاتصال على الرقم المخصص لخدمة العملاء.",
+        "q6": "",
+        "a6": "",
         "color_scheme": "scheme-1",
         "padding_top": 80,
         "padding_bottom": 80
