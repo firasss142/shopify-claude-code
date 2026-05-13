@@ -40,8 +40,11 @@
 <section
   class="quraan-buybox color-{{ section.settings.color_scheme }}"
   data-product-id="{{ product.id }}"
+  data-product-title="{{ product.title | escape }}"
   data-default-variant-id="{{ default_variant.id }}"
   data-has-product="{{ has_product }}"
+  data-webhook-url="{{ section.settings.webhook_url | escape }}"
+  data-success-url="{{ section.settings.success_url | default: '/pages/thank-you' | escape }}"
   style="--quraan-buybox-padding-top: {{ section.settings.padding_top }}px; --quraan-buybox-padding-bottom: {{ section.settings.padding_bottom }}px;"
 >
   {%- if has_product == false and request.design_mode -%}
@@ -446,6 +449,20 @@
     { "type": "text", "id": "summary_shipping_label", "label": "الشحن", "default": "الشحن" },
     { "type": "text", "id": "summary_shipping_value", "label": "قيمة الشحن", "default": "مجاني" },
     { "type": "text", "id": "summary_total_label", "label": "الإجمالي", "default": "الإجمالي" },
+
+    { "type": "header", "content": "إرسال الطلبات (Webhook)" },
+    {
+      "type": "url",
+      "id": "webhook_url",
+      "label": "رابط استلام الطلبات",
+      "info": "يتم إرسال بيانات الطلب إلى هذا الرابط كـ JSON عبر POST. اتركه فارغاً لإيقاف الإرسال."
+    },
+    {
+      "type": "url",
+      "id": "success_url",
+      "label": "صفحة الشكر بعد الطلب",
+      "info": "افتراضياً /pages/thank-you — تأكد من إنشاء هذه الصفحة في Shopify."
+    },
 
     { "type": "header", "content": "نموذج الطلب" },
     { "type": "text", "id": "form_heading", "label": "عنوان النموذج", "default": "أدخل بياناتك لإتمام الطلب" },

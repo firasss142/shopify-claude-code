@@ -13,10 +13,16 @@
     const discountRow = section.querySelector('[data-buybox-discount-row]');
     const totalEl = section.querySelector('[data-buybox-total]');
 
+    const webhookUrl = section.dataset.webhookUrl || '';
+    const successUrl = section.dataset.successUrl || '/pages/thank-you';
+    const productTitle = section.dataset.productTitle || '';
+    const productId = section.dataset.productId || '';
+
     let currentVariantId = section.dataset.defaultVariantId;
     let currentQuantity = 1;
     let currentPrice = 0;
     let currentCompareAt = 0;
+    let currentBundleLabel = '';
 
     // ---- Gallery thumbs ----
     thumbs.forEach((thumb) => {
@@ -68,6 +74,8 @@
       currentQuantity = parseInt(input.dataset.quantity, 10) || 1;
       currentPrice = parseInt(input.dataset.price, 10) || 0;
       currentCompareAt = parseInt(input.dataset.compareAt, 10) || 0;
+      const labelEl = input.closest('label')?.querySelector('.quraan-buybox__bundle-label');
+      currentBundleLabel = labelEl ? labelEl.textContent.trim() : '';
       updateSummary();
     }
 
@@ -107,9 +115,11 @@
       });
       if (!res.ok) {
         const txt = await res.text().catch(() => '');
-        throw new Error('Cart API error: ' + res.status + ' ' + txt);
+        throw new Error('Request failed (' + res.status + '): ' + txt);
       }
-      return res.json();
+      const ct = res.headers.get('content-type') || '';
+      if (ct.indexOf('application/json') !== -1) return res.json();
+      return res.text();
     }
 
     form.addEventListener('submit', async (e) => {
@@ -137,41 +147,59 @@
         return;
       }
 
-      const upsellInputs = form.querySelectorAll('.quraan-buybox__upsell-check:checked');
-      const items = [
-        {
-          id: parseInt(currentVariantId, 10),
-          quantity: currentQuantity,
-          properties: {
-            'المدينة': data.city,
-            'المنطقة': data.area || '',
-            'العنوان': data.address,
-          },
-        },
-      ];
-      upsellInputs.forEach((input) => {
-        const vid = parseInt(input.dataset.variantId, 10);
-        if (vid) items.push({ id: vid, quantity: 1 });
+      if (!webhookUrl) {
+        setError('لم يتم إعداد رابط استلام الطلبات. يُرجى التواصل مع المتجر.');
+        console.error('[quraan-buybox] webhookUrl is empty. Set it in the section settings.');
+        return;
+      }
+
+      const upsells = [];
+      form.querySelectorAll('.quraan-buybox__upsell-check:checked').forEach((input) => {
+        upsells.push({
+          variant_id: parseInt(input.dataset.variantId, 10) || null,
+          title: (input.closest('label')?.querySelector('.quraan-buybox__upsell-title')?.textContent || '').trim(),
+        });
       });
+
+      const payload = {
+        source: 'quraan-buybox',
+        submitted_at: new Date().toISOString(),
+        customer: {
+          name: data.name.trim(),
+          phone: data.phone.trim(),
+          city: data.city,
+          area: (data.area || '').trim(),
+          address: data.address.trim(),
+        },
+        product: {
+          id: productId,
+          title: productTitle,
+          variant_id: parseInt(currentVariantId, 10),
+          bundle_label: currentBundleLabel,
+          quantity: currentQuantity,
+          unit_price: currentPrice / Math.max(currentQuantity, 1),
+          total_price: currentPrice,
+          compare_at_total: currentCompareAt,
+          currency: (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) || '',
+        },
+        upsells: upsells,
+        page_url: window.location.href,
+        user_agent: navigator.userAgent,
+      };
 
       submitBtn.disabled = true;
       const originalLabel = submitBtn.textContent;
       submitBtn.textContent = '...';
 
       try {
-        await postJSON('/cart/clear.js', {});
-        await postJSON('/cart/add.js', { items });
-        await postJSON('/cart/update.js', {
-          attributes: {
-            'الاسم': data.name,
-            'الهاتف': data.phone,
-          },
-          note: 'الاسم: ' + data.name + '\nالهاتف: ' + data.phone + '\nالمدينة: ' + data.city + '\nالمنطقة: ' + (data.area || '-') + '\nالعنوان: ' + data.address,
-        });
-        window.location.href = '/checkout';
+        await postJSON(webhookUrl, payload);
+        const successWithParams = successUrl + (successUrl.indexOf('?') === -1 ? '?' : '&') +
+          'name=' + encodeURIComponent(payload.customer.name) +
+          '&city=' + encodeURIComponent(payload.customer.city);
+        window.location.href = successWithParams;
       } catch (apiErr) {
-        console.error(apiErr);
-        setError('حدث خطأ أثناء معالجة الطلب. الرجاء المحاولة مجدداً.');
+        console.error('[quraan-buybox] submit failed', apiErr);
+        setError('حدث خطأ أثناء إرسال الطلب. الرجاء المحاولة مجدداً.');
         submitBtn.disabled = false;
         submitBtn.textContent = originalLabel;
       }

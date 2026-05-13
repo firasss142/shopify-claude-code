@@ -47,6 +47,8 @@
         "label_address": "العنوان التفصيلي",
         "submit_label": "اطلب الآن",
         "purchases_pill": "أكثر من 639 طلباً خلال 24 ساعة",
+        "webhook_url": "https://ordra-gamma.vercel.app/api/webhooks/3f23ba62-7f66-40d0-ba86-b3bc75f62d12",
+        "success_url": "/pages/thank-you",
         "upsell_product_1": "",
         "upsell_label_1": "",
         "upsell_product_2": "",
