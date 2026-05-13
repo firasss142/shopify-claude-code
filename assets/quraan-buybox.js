@@ -131,7 +131,6 @@
         name: fd.get('name'),
         phone: fd.get('phone'),
         city: fd.get('city'),
-        area: fd.get('area'),
         address: fd.get('address'),
       };
 
@@ -168,7 +167,6 @@
           name: data.name.trim(),
           phone: data.phone.trim(),
           city: data.city,
-          area: (data.area || '').trim(),
           address: data.address.trim(),
         },
         product: {
