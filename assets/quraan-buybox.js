@@ -6,6 +6,7 @@
     const bundleInputs = section.querySelectorAll('input[name="quraan_bundle"]');
     const thumbs = section.querySelectorAll('.quraan-buybox__thumb');
     const mainImage = section.querySelector('#quraan-main-image .quraan-buybox__image');
+    const stickyCta = section.querySelector('.quraan-buybox__sticky-cta');
     const submitBtn = form ? form.querySelector('.quraan-buybox__submit') : null;
     const errorEl = form ? form.querySelector('[data-buybox-error]') : null;
     const subtotalEl = section.querySelector('[data-buybox-subtotal]');
@@ -75,6 +76,17 @@
       input.addEventListener('change', () => syncBundle(input));
       if (input.checked) syncBundle(input);
     });
+
+    // ---- Sticky CTA focus assist ----
+    if (stickyCta && form) {
+      stickyCta.addEventListener('click', () => {
+        // Let the native anchor scroll happen, then move focus.
+        setTimeout(() => {
+          const firstField = form.querySelector('input, select');
+          if (firstField) firstField.focus({ preventScroll: true });
+        }, 400);
+      });
+    }
 
     // ---- Form submit ----
     if (!form) return;
