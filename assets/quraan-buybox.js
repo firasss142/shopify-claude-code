@@ -160,8 +160,14 @@
         });
       });
 
+      const idempotencyKey =
+        (window.crypto && window.crypto.randomUUID && window.crypto.randomUUID()) ||
+        'qb-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+
       const payload = {
         source: 'quraan-buybox',
+        idempotency_key: idempotencyKey,
+        order_id: idempotencyKey,
         submitted_at: new Date().toISOString(),
         customer: {
           name: data.name.trim(),
