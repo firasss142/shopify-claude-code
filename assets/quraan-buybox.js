@@ -127,10 +127,15 @@
       setError(null);
 
       const fd = new FormData(form);
+      const citySelect = form.querySelector('#quraan-city');
+      const cityOption = citySelect && citySelect.selectedOptions[0];
       const data = {
         name: fd.get('name'),
         phone: fd.get('phone'),
         city: fd.get('city'),
+        cityId: cityOption ? cityOption.value : '',
+        cityName: cityOption ? (cityOption.dataset.cityName || cityOption.textContent.trim()) : '',
+        cityRouteId: cityOption ? (cityOption.dataset.routeId || '') : '',
         address: fd.get('address'),
       };
 
@@ -172,7 +177,10 @@
         customer: {
           name: data.name.trim(),
           phone: data.phone.trim(),
-          city: data.city,
+          city: data.cityName,
+          city_id: data.cityId ? parseInt(data.cityId, 10) : null,
+          city_name: data.cityName,
+          route_id: data.cityRouteId ? parseInt(data.cityRouteId, 10) : null,
           address: data.address.trim(),
         },
         product: {
