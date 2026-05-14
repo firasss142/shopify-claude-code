@@ -1,0 +1,8 @@
+{
+  "name": "shopify-theme",
+  "private": true,
+  "description": "Shopify theme — dev tooling only (theme itself is not an npm package).",
+  "scripts": {
+    "test": "node --test"
+  }
+}

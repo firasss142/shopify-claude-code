@@ -1,6 +1,30 @@
 (function () {
   'use strict';
 
+  // Shopify exposes variant/line prices as integers in the currency's MINOR unit
+  // (cents for USD, millimes for 3-decimal currencies like TND/LYD). The OMS expects
+  // MAJOR units. Derive the decimal count from the ISO currency code itself so the
+  // conversion is correct per-currency (TND/LYD => 3, USD => 2, JPY => 0) with no
+  // hardcoded divisor.
+  function minorUnitToMajor(minorAmount, currencyCode) {
+    var amount = Number(minorAmount) || 0;
+    var fractionDigits = 2;
+    if (currencyCode) {
+      try {
+        var resolved = new Intl.NumberFormat('en', {
+          style: 'currency',
+          currency: currencyCode,
+        }).resolvedOptions().maximumFractionDigits;
+        if (typeof resolved === 'number') fractionDigits = resolved;
+      } catch (e) {
+        fractionDigits = 2;
+      }
+    }
+    var major = amount / Math.pow(10, fractionDigits);
+    // Round to the currency's precision to avoid float artifacts (e.g. 7.0000000001).
+    return Number(major.toFixed(fractionDigits));
+  }
+
   function init(section) {
     const form = section.querySelector('#quraan-buybox-form');
     const bundleInputs = section.querySelectorAll('input[name="quraan_bundle"]');
@@ -169,6 +193,18 @@
         (window.crypto && window.crypto.randomUUID && window.crypto.randomUUID()) ||
         'qb-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
 
+      const currencyCode =
+        (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) || '';
+
+      // currentPrice/currentCompareAt are in the currency's MINOR unit (Shopify cents/
+      // millimes). The OMS expects MAJOR units, so convert per-currency before sending.
+      const totalPriceMajor = minorUnitToMajor(currentPrice, currencyCode);
+      const compareAtMajor = minorUnitToMajor(currentCompareAt, currencyCode);
+      const unitPriceMajor = minorUnitToMajor(
+        currentPrice / Math.max(currentQuantity, 1),
+        currencyCode
+      );
+
       const payload = {
         source: 'quraan-buybox',
         idempotency_key: idempotencyKey,
@@ -189,10 +225,10 @@
           variant_id: parseInt(currentVariantId, 10),
           bundle_label: currentBundleLabel,
           quantity: currentQuantity,
-          unit_price: currentPrice / Math.max(currentQuantity, 1),
-          total_price: currentPrice,
-          compare_at_total: currentCompareAt,
-          currency: (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) || '',
+          unit_price: unitPriceMajor,
+          total_price: totalPriceMajor,
+          compare_at_total: compareAtMajor,
+          currency: currencyCode,
         },
         upsells: upsells,
         page_url: window.location.href,
@@ -222,9 +258,16 @@
     document.querySelectorAll('.quraan-buybox').forEach(init);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot);
-  } else {
-    boot();
+  if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot);
+    } else {
+      boot();
+    }
+  }
+
+  // Exported for unit tests (Node). No effect in the browser.
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { minorUnitToMajor: minorUnitToMajor };
   }
 })();

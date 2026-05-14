@@ -12,20 +12,33 @@
     assign has_product = true
   endif
 
-  # Each bundle tier: quantity × per-tier price override (in cents). If override is blank/0, fall back to unit_price × qty.
+  # The merchant enters bundle prices in the major unit (e.g. 80 LYD). Shopify stores
+  # all prices in the currency's MINOR unit, so we must scale up by 10^(decimal places).
+  # That count is currency-dependent: TND/LYD have 3 decimals, USD/EUR 2, JPY 0 — a
+  # hardcoded ×100 corrupts any non-2-decimal currency. Default to 2 for anything unlisted.
+  assign currency_code = cart.currency.iso_code | default: shop.currency
+  assign currency_minor_units = 100
+  case currency_code
+    when 'TND', 'LYD', 'BHD', 'IQD', 'JOD', 'KWD', 'OMR'
+      assign currency_minor_units = 1000
+    when 'JPY', 'KRW', 'VND', 'CLP', 'ISK'
+      assign currency_minor_units = 1
+  endcase
+
+  # Each bundle tier: quantity × per-tier price override. If override is blank/0, fall back to unit_price × qty.
   assign b1_qty = section.settings.bundle_1_quantity | default: 1
   assign b2_qty = section.settings.bundle_2_quantity | default: 2
   assign b3_qty = section.settings.bundle_3_quantity | default: 3
 
-  assign b1_price = section.settings.bundle_1_price | times: 100
+  assign b1_price = section.settings.bundle_1_price | times: currency_minor_units
   if b1_price == 0
     assign b1_price = unit_price | times: b1_qty
   endif
-  assign b2_price = section.settings.bundle_2_price | times: 100
+  assign b2_price = section.settings.bundle_2_price | times: currency_minor_units
   if b2_price == 0
     assign b2_price = unit_price | times: b2_qty
   endif
-  assign b3_price = section.settings.bundle_3_price | times: 100
+  assign b3_price = section.settings.bundle_3_price | times: currency_minor_units
   if b3_price == 0
     assign b3_price = unit_price | times: b3_qty
   endif
