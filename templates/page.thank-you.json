@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "quraan_thank_you": {
+      "type": "quraan-thank-you",
+      "settings": {
+        "title": "شكراً لك {name}، تم استلام طلبك!",
+        "subtitle": "طلبك الآن قيد المعالجة. سنتواصل معك هاتفياً لتأكيد التفاصيل.",
+        "city_label": "مدينة التوصيل",
+        "delivery_label": "مدة التوصيل المتوقعة",
+        "delivery_value": "2 - 5 أيام عمل",
+        "payment_label": "طريقة الدفع",
+        "payment_value": "نقداً عند الاستلام",
+        "note": "يرجى إبقاء هاتفك متاحاً لاستقبال مكالمة التأكيد خلال 24 ساعة.",
+        "whatsapp_number": "218910000000",
+        "whatsapp_label": "تواصل معنا على واتساب",
+        "continue_label": "العودة للتسوق",
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": [
+    "quraan_thank_you"
+  ]
+}

@@ -1,0 +1,138 @@
+.quraan-ty {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  padding-block: var(--quraan-ty-padding-top, 96px) var(--quraan-ty-padding-bottom, 96px);
+}
+
+.quraan-ty__inner {
+  max-width: 600px;
+  margin-inline: auto;
+  padding-inline: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.quraan-ty__badge {
+  width: 72px;
+  height: 72px;
+  color: var(--color-primary);
+}
+
+.quraan-ty__badge svg {
+  width: 100%;
+  height: 100%;
+}
+
+.quraan-ty__title {
+  font-family: var(--font-heading--family, inherit);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  color: var(--color-foreground-heading);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.quraan-ty__subtitle {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-foreground);
+  margin: 0;
+  max-width: 46ch;
+}
+
+.quraan-ty__card {
+  width: 100%;
+  background: rgb(var(--color-foreground-rgb) / 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.quraan-ty__card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.9375rem;
+}
+
+.quraan-ty__card-row + .quraan-ty__card-row {
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.quraan-ty__card-label {
+  color: var(--color-foreground);
+  opacity: 0.8;
+}
+
+.quraan-ty__card-value {
+  font-family: var(--font-subheading--family, inherit);
+  font-weight: 700;
+  color: var(--color-foreground-heading);
+}
+
+.quraan-ty__note {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-foreground);
+  opacity: 0.85;
+  margin: 4px 0 0;
+  max-width: 46ch;
+}
+
+.quraan-ty__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.quraan-ty__whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  font-family: var(--font-subheading--family, inherit);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  background: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+  border: 1px solid var(--color-primary-button-border);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.quraan-ty__whatsapp:hover,
+.quraan-ty__whatsapp:focus-visible {
+  background: var(--color-primary-button-hover-background);
+  color: var(--color-primary-button-hover-text);
+}
+
+.quraan-ty__whatsapp svg {
+  width: 22px;
+  height: 22px;
+}
+
+.quraan-ty__continue {
+  font-family: var(--font-subheading--family, inherit);
+  font-size: 1rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  padding: 8px;
+  border-bottom: 1px solid currentColor;
+  align-self: center;
+}
+
+.quraan-ty__continue:hover {
+  color: var(--color-primary-hover);
+}
